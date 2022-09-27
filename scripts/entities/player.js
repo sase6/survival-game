@@ -1,12 +1,15 @@
 import Entity from './entityClass.js';
 
 class Player extends Entity {
-  constructor(x, y, hp, pushOnFrame, speed=5) {
+  constructor(x, y, hp, pushOnFrame, speed=3.5) {
     super(x, y, hp, 'player', pushOnFrame);
     this.speed = speed;
     this.prevSpeed = speed;
     this.inShift = false;
     this.dir = [];
+
+    // Meta
+    this.crouchSpeedMultiplier = 0.365;
 
     this.initEvents();
   }
@@ -18,7 +21,11 @@ class Player extends Entity {
       const isMoveKey = moveKeys[key];
       const notInDir = this.dir.indexOf(key) === -1;
 
-      if (key === 'shift') this.inShift = true;
+      if (key === 'shift') {
+        this.inShift = true;
+        this.prevSpeed = this.speed;
+        this.speed = this.speed * this.crouchSpeedMultiplier;
+      }
       else if (isMoveKey && notInDir) this.dir.unshift(key);
     });
 
@@ -28,7 +35,10 @@ class Player extends Entity {
       const indexInDir = this.dir.indexOf(key);
       const inDir = indexInDir !== -1;
 
-      if (key === 'shift') this.inShift = false;
+      if (key === 'shift') {
+        this.inShift = false;
+        this.speed = this.prevSpeed;
+      }
       else if (isMoveKey && inDir) this.dir.splice(indexInDir, 1);
     });
 
