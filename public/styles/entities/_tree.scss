@@ -5,3 +5,18 @@
   background: url('/public/assets/tree/pine.png');
   background-size: cover;
 };
+
+// Animations
+@keyframes tree-shake-left {
+  50% {
+    transform-origin: right;
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes tree-shake-right {
+  50% {
+    transform-origin: left;
+    transform: rotate(-2deg);
+  }
+}g
