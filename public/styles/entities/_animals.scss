@@ -1,0 +1,8 @@
+.deer {
+  @include defaultEntity();
+  height: 64px;
+  width: 64px;
+  background: url('/public/assets/animals/Deer.png');
+  background-size: cover;
+  border: none;
+}

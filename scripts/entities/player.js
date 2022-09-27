@@ -23,6 +23,7 @@ class Player extends Entity {
       const notInDir = this.dir.indexOf(key) === -1;
 
       if (key === 'shift') {
+        e.preventDefault();
         this.inShift = true;
         this.prevSpeed = this.speed;
         this.speed = this.speed * this.crouchSpeedMultiplier;

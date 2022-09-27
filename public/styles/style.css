@@ -71,6 +71,18 @@
   background-size: cover;
 }
 
+.deer {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  height: 64px;
+  width: 64px;
+  background: url("/public/assets/animals/Deer.png");
+  background-size: cover;
+  border: none;
+}
+
 * {
   margin: 0;
   padding: 0;

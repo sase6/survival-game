@@ -9,6 +9,7 @@ class World {
 
     // Spawns
     spawn.grasses(15, this.pushOnFrame, this.player);
+    spawn.deers(10, this.pushOnFrame, this.player);
     spawn.trees(25, 20, this.pushOnFrame, this.player);
 
     this.loop();

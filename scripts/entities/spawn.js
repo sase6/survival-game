@@ -1,5 +1,6 @@
 import Tree from './tree/treeClass.js';
 import Grass from './environment/grassClass.js';
+import Deer from './animals/deer.js';
 import random from '../helper/randomizer.js';
 
 const trees = (max, min, pushOnFrame, player) => {
@@ -19,6 +20,14 @@ const grasses = (chance, pushOnFrame, player, xMax=1200, yMax=600, size=32) => {
   }
 };
 
+const deers = (chance, pushOnFrame, player, xMax=1200, yMax=600, size=128) => {
+  for (let x = 0; x < xMax; x += size) {
+    for (let y = 0; y < yMax; y += size) {
+      if (random.percent(chance)) new Deer(x, y, pushOnFrame, player);
+    }
+  }
+};
+
 export default {
-  trees, grasses
+  trees, grasses, deers
 };
