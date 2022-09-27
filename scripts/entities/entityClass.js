@@ -30,10 +30,10 @@ class Entity {
     );
   }
 
-  getOrigin(offsetBottom=16) {
+  getOrigin(offsetBottom=16, yPosition=null) {
     const selfRect = this.node.getBoundingClientRect();
     const originX = ((selfRect.right - selfRect.left) / 2) + this.x;
-    const originY = (selfRect.bottom - selfRect.top) + this.y - offsetBottom;
+    const originY = (selfRect.bottom - selfRect.top) + (yPosition || this.y) - offsetBottom;
     return [originX, originY];
   }
 };

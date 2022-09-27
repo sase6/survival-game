@@ -81,6 +81,7 @@
   background: url("/public/assets/animals/Deer.png");
   background-size: cover;
   border: none;
+  transform-origin: bottom center;
 }
 
 * {

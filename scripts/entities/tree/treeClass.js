@@ -2,7 +2,7 @@ import Entity from '../entityClass.js';
 
 class Tree extends Entity {
   constructor(x, y, pushOnFrame, player) {
-    super(x, y, 300, 'default-tree', pushOnFrame, false);
+    super(x, y, 300, 'default-tree', pushOnFrame, true);
     this.player = player;
     this.node.style.zIndex = `${parseInt(this.y + 128)}`;
     
