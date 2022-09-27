@@ -32,7 +32,7 @@ class Player extends Entity {
       else if (isMoveKey && inDir) this.dir.splice(indexInDir, 1);
     });
 
-    this.pushOnFrame(this.checkMove);
+    this.pushOnFrame(() => this.checkMove());
   }
 
   checkMove() {
