@@ -4,6 +4,7 @@ class Tree extends Entity {
   constructor(x, y, pushOnFrame, player) {
     super(x, y, 300, 'default-tree', pushOnFrame, false);
     this.player = player;
+    this.node.style.zIndex = `${parseInt(this.y + 128)}`;
     
     //Meta
     this.interactRange = 48;

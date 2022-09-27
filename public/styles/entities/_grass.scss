@@ -1,0 +1,6 @@
+.default-grass {
+  @include defaultEntity();
+  border: none;
+  background: url('/public/assets/environment/grass.png');
+  background-size: cover;
+}

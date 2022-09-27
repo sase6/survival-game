@@ -8,7 +8,8 @@ class World {
     this.player = new Player(0, 0, 100, this.pushOnFrame);
 
     // Spawns
-    spawn.trees(25, 13, this.pushOnFrame, this.player);
+    spawn.grasses(15, this.pushOnFrame, this.player);
+    spawn.trees(25, 20, this.pushOnFrame, this.player);
 
     this.loop();
   }

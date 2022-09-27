@@ -61,6 +61,16 @@
     opacity: 0;
   }
 }
+.default-grass {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  border: none;
+  background: url("/public/assets/environment/grass.png");
+  background-size: cover;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -78,4 +88,6 @@
   top: calc(50vh - 300px);
   left: calc(50vw - 600px);
   border: 1px solid black;
+  background: olivedrab;
+  overflow: hidden;
 }/*# sourceMappingURL=style.css.map */

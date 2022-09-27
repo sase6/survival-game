@@ -15,6 +15,7 @@ $blackBorder: 1px solid black;
 // Imports
 @import './entities/player.scss';
 @import './entities/tree';
+@import './entities/grass';
 
 // Styles
 * {
@@ -33,4 +34,6 @@ $blackBorder: 1px solid black;
   top: calc(50vh - 300px);
   left: calc(50vw - 600px);
   border: $blackBorder;
+  background: olivedrab;
+  overflow: hidden;
 }

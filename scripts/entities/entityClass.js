@@ -25,14 +25,15 @@ class Entity {
       [
         ['top', this.y, 'px'],
         ['left', this.x, 'px'],
+        ['zIndex', (this.getOrigin(0)[1]).toString(), '']
       ]
     );
   }
 
-  getOrigin(yOffsetBottom=16) {
+  getOrigin(offsetBottom=16) {
     const selfRect = this.node.getBoundingClientRect();
     const originX = ((selfRect.right - selfRect.left) / 2) + this.x;
-    const originY = (selfRect.bottom - selfRect.top) + this.y - yOffsetBottom;
+    const originY = (selfRect.bottom - selfRect.top) + this.y - offsetBottom;
     return [originX, originY];
   }
 };

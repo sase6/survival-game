@@ -8,6 +8,12 @@ const valInArray = (arrOfVals=[]) => {
   return arrOfVals[index];
 };
 
+const percent = (percentage) => {
+  if (percentage >= 100) return true;
+  const randomNum = number(100);
+  return randomNum <= percentage;
+};
+
 export default {
-  number, valInArray,
+  number, valInArray, percent
 };
