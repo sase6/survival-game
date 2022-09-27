@@ -1,15 +1,12 @@
-import Player from "./entities/player";
+import Player from "./entities/player.js";
 
 class World {
   constructor() {
     this.perFrame = [];
+    this.pushOnFrame = (func) => this.perFrame.push(func);
     this.player = new Player(0, 0, 100, this.pushOnFrame);
 
     this.loop();
-  }
-
-  pushOnFrame(func) {
-    this.perFrame.push(func);
   }
 
   loop() {

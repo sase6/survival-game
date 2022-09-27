@@ -5,7 +5,15 @@ $gameWidth: 1200px;
 $gameHeight: 600px;
 $blackBorder: 1px solid black;
 
+@mixin defaultEntity {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: $blackBorder;
+}
+
 // Imports
+@import './entities/player.scss';
 
 // Styles
 * {
