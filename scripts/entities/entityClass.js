@@ -28,6 +28,13 @@ class Entity {
       ]
     );
   }
+
+  getOrigin() {
+    const selfRect = this.node.getBoundingClientRect();
+    const originX = ((selfRect.right - selfRect.left) / 2) + this.x;
+    const originY = (selfRect.bottom - selfRect.top) + this.y - 16;
+    return [originX, originY];
+  }
 };
 
 export default Entity;
