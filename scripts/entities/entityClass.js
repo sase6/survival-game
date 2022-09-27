@@ -29,10 +29,10 @@ class Entity {
     );
   }
 
-  getOrigin() {
+  getOrigin(yOffsetBottom=16) {
     const selfRect = this.node.getBoundingClientRect();
     const originX = ((selfRect.right - selfRect.left) / 2) + this.x;
-    const originY = (selfRect.bottom - selfRect.top) + this.y - 16;
+    const originY = (selfRect.bottom - selfRect.top) + this.y - yOffsetBottom;
     return [originX, originY];
   }
 };
