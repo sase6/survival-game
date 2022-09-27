@@ -16,6 +16,7 @@ class Entity {
     this.node = $.make(classes);
     $.append(this.node, this.parent);
     if (renderOnFrame) this.pushOnFrame(() => this.renderPosition());
+    else this.renderPosition();
   }
 
   renderPosition() {
