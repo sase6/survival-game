@@ -10,6 +10,7 @@ class Player extends Entity {
 
     // Meta
     this.crouchSpeedMultiplier = 0.365;
+    this.lumberDamage = 20;
 
     this.initEvents();
   }

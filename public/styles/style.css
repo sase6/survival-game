@@ -12,31 +12,53 @@
   height: 128px;
   background: url("/public/assets/tree/pine.png");
   background-size: cover;
+  transform-style: preserve-3D;
+  transform-origin: bottom center !important;
 }
 
-@-webkit-keyframes tree-shake-left {
-  50% {
-    transform-origin: right;
-    transform: rotate(2deg);
-  }
-}
-
-@keyframes tree-shake-left {
-  50% {
-    transform-origin: right;
-    transform: rotate(2deg);
-  }
-}
 @-webkit-keyframes tree-shake-right {
   50% {
-    transform-origin: left;
-    transform: rotate(-2deg);
+    transform: rotate(4deg);
   }
 }
+
 @keyframes tree-shake-right {
   50% {
-    transform-origin: left;
-    transform: rotate(-2deg);
+    transform: rotate(4deg);
+  }
+}
+@-webkit-keyframes tree-shake-left {
+  50% {
+    transform: rotate(-4deg);
+  }
+}
+@keyframes tree-shake-left {
+  50% {
+    transform: rotate(-4deg);
+  }
+}
+@-webkit-keyframes tree-fall-left {
+  100% {
+    transform: rotate(-90deg);
+    opacity: 0;
+  }
+}
+@keyframes tree-fall-left {
+  100% {
+    transform: rotate(-90deg);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes tree-fall-right {
+  100% {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+}
+@keyframes tree-fall-right {
+  100% {
+    transform: rotate(90deg);
+    opacity: 0;
   }
 }
 * {
