@@ -15,6 +15,17 @@ class Entity {
   build(classes) {
     this.node = $.make(classes);
     $.append(this.node, this.parent);
+    this.pushOnFrame(() => this.renderPosition());
+  }
+
+  renderPosition() {
+    $.css(
+      this.node,
+      [
+        ['top', this.y, 'px'],
+        ['left', this.x, 'px'],
+      ]
+    );
   }
 };
 
