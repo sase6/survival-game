@@ -9,9 +9,10 @@ class World {
 
     // Spawns
     spawn.waterBodies(this.pushOnFrame, this.player);
+    spawn.stones(1, this.pushOnFrame, this.player);
     spawn.grasses(15, this.pushOnFrame, this.player);
     spawn.deers(12.5, this.pushOnFrame, this.player);
-    spawn.trees(25, 20, this.pushOnFrame, this.player);
+    spawn.trees(40, 20, this.pushOnFrame, this.player);
 
     this.loop();
   }

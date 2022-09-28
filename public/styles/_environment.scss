@@ -4,3 +4,17 @@
   background-color: lightskyblue;
   z-index: 1 !important;
 }
+
+.stone {
+  @include defaultEntity();
+  border: none;
+  background: url('/public/assets/environment/stone.png');
+  background-size: cover;
+}
+
+.purple-mushroom {
+  @include defaultEntity();
+  border: none;
+  background: url('/public/assets/environment/purple-mushroom.png');
+  background-size: cover;
+}

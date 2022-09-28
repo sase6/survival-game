@@ -2,7 +2,7 @@
   position: absolute;
   width: 64px;
   height: 128px;
-  background: url('/public/assets/tree/pine.png');
+  background: url('/public/assets/tree/tree.png');
   background-size: cover;
   transform-style: preserve-3D; 
   transform-origin: bottom center !important;
@@ -32,7 +32,7 @@
   100% {
     transform: rotate(90deg);
     opacity: 0;
-  }
+  } 
 }
 
 .spruce-log-drop {

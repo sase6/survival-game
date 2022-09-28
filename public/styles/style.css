@@ -10,7 +10,7 @@
   position: absolute;
   width: 64px;
   height: 128px;
-  background: url("/public/assets/tree/pine.png");
+  background: url("/public/assets/tree/tree.png");
   background-size: cover;
   transform-style: preserve-3D;
   transform-origin: bottom center !important;
@@ -111,6 +111,26 @@
   border: none;
   background-color: lightskyblue;
   z-index: 1 !important;
+}
+
+.stone {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  border: none;
+  background: url("/public/assets/environment/stone.png");
+  background-size: cover;
+}
+
+.purple-mushroom {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  border: none;
+  background: url("/public/assets/environment/purple-mushroom.png");
+  background-size: cover;
 }
 
 * {
