@@ -2,11 +2,18 @@
   position: absolute;
   width: 64px;
   height: 128px;
-  background: url('/public/assets/tree/tree.png');
+  background: url('/public/assets/tree/pine.png');
   background-size: cover;
   transform-style: preserve-3D; 
   transform-origin: bottom center !important;
 };
+
+.pine-tree-shadow {
+  @include defaultEntity();
+  border: none;
+  background: url('/public/assets/shadows/pine-tree-shadow.png');
+  background-size: cover;
+}
 
 // Animations
 @keyframes tree-shake-right {
@@ -41,7 +48,6 @@
   height: 16px;
   background: url('/public/assets/tree/spruce-log-drop.png');
   background-size: cover;
-  // transition: all 2s;
 }
 
 @keyframes log-fall {

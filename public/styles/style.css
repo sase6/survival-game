@@ -10,10 +10,20 @@
   position: absolute;
   width: 64px;
   height: 128px;
-  background: url("/public/assets/tree/tree.png");
+  background: url("/public/assets/tree/pine.png");
   background-size: cover;
   transform-style: preserve-3D;
   transform-origin: bottom center !important;
+}
+
+.pine-tree-shadow {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  border: none;
+  background: url("/public/assets/shadows/pine-tree-shadow.png");
+  background-size: cover;
 }
 
 @-webkit-keyframes tree-shake-right {

@@ -6,6 +6,7 @@ class Tree extends Entity {
   constructor(x, y, pushOnFrame, player) {
     super(x, y, 300, 'default-tree', pushOnFrame, true);
     this.player = player;
+    this.addShadow();
     this.node.style.zIndex = `${parseInt(this.y + 128)}`;
     
     //Meta
@@ -36,6 +37,15 @@ class Tree extends Entity {
         
       } else return;
     });
+  }
+
+  addShadow() {
+    this.shadow = $.make('pine-tree-shadow');
+    $.append(this.shadow, $.get('#shadow-layer'));
+    $.css(this.shadow, [
+      ['top', this.y + 102, 'px'],
+      ['left', this.x + 13, 'px']
+    ]);
   }
 
   beforeDeath() {
