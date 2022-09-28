@@ -17,6 +17,7 @@ $blackBorder: 1px solid black;
 @import './entities/tree';
 @import './entities/grass';
 @import './entities/animals';
+@import './_environment.scss' ;
 
 // Styles
 * {

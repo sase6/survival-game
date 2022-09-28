@@ -1,0 +1,6 @@
+.water-node {
+  @include defaultEntity();
+  border: none;
+  background-color: lightskyblue;
+  z-index: 1 !important;
+}

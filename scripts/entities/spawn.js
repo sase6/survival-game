@@ -1,6 +1,7 @@
 import Tree from './tree/treeClass.js';
 import Grass from './environment/grassClass.js';
 import Deer from './animals/deer.js';
+import WaterBody from './environment/waterBodyClass.js';
 import random from '../helper/randomizer.js';
 
 const trees = (max, min, pushOnFrame, player) => {
@@ -28,6 +29,14 @@ const deers = (chance, pushOnFrame, player, xMax=1200, yMax=600, size=128) => {
   }
 };
 
+const waterBodies = (pushOnFrame, player, minAmt=1, maxAmt=3, xMax=700, yMax=500) => {
+  for (let i = 0; i < random.number(maxAmt, minAmt); i++) {
+    const x = random.number(xMax, 50);
+    const y = random.number(yMax, 50);
+    new WaterBody(x, y, pushOnFrame, player);
+  }
+};
+
 export default {
-  trees, grasses, deers
+  trees, grasses, deers, waterBodies
 };

@@ -8,6 +8,7 @@ class World {
     this.player = new Player(0, 0, 100, this.pushOnFrame);
 
     // Spawns
+    spawn.waterBodies(this.pushOnFrame, this.player);
     spawn.grasses(15, this.pushOnFrame, this.player);
     spawn.deers(12.5, this.pushOnFrame, this.player);
     spawn.trees(25, 20, this.pushOnFrame, this.player);
