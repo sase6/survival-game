@@ -13,6 +13,7 @@ $blackBorder: 1px solid black;
 }
 
 // Imports
+@import './ui/inventory';
 @import './entities/player.scss';
 @import './entities/tree';
 @import './entities/grass';

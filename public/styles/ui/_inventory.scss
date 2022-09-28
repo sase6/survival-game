@@ -1,0 +1,19 @@
+$slot-width: 48px;
+
+.hotbar {
+  position: absolute;
+  width: 240px;
+  height: $slot-width;
+  z-index: 99999;
+  top: calc(100% - 56px);
+  left: calc(50% - 120px);
+  display: grid;
+  grid-template-columns: $slot-width $slot-width $slot-width $slot-width $slot-width;
+}
+
+.hotbar-slot {
+  background-color: red;
+  background: url('/public/assets/ui/inventory-slot.png');
+  background-size: cover;
+  opacity: 0.85;
+} 
