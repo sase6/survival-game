@@ -2,7 +2,7 @@ import $ from '../helper/dom.js';
 const emptyFunc = () => {};
 
 class Entity {
-  constructor(x=0, y=0, hp=100, classes=[], pushOnFrame=emptyFunc, renderOnFrame=true, parent=$.get('#app')) {
+  constructor(x=0, y=0, hp=100, classes=[], pushOnFrame=emptyFunc, renderOnFrame=true, parent=$.get('#plane-1')) {
     this.parent = parent;
     this.x = x;
     this.y = y;

@@ -1,9 +1,10 @@
 import Entity from "../entityClass.js";
 import random from '../../helper/randomizer.js';
+import $ from '../../helper/dom.js';
 
 class WaterBody extends Entity {
   constructor(x, y, pushOnFrame, player) {
-    super(x, y, 0, 'water-body-container', pushOnFrame, false);
+    super(x, y, 0, 'water-body-container', pushOnFrame, false, $.get('#plane1'));
     this.player = player;
 
     // Meta
