@@ -34,3 +34,18 @@
     opacity: 0;
   }
 }
+
+.spruce-log-drop {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: url('/public/assets/tree/spruce-log-drop.png');
+  background-size: cover;
+  // transition: all 2s;
+}
+
+@keyframes log-fall {
+  100% {
+    transform: translateY(128px);
+  }
+}
