@@ -1,4 +1,4 @@
-import Player from "./entities/player.js";
+import Player from "./entities/player/player.js";
 import spawn from './entities/spawn.js';
 
 class World {

@@ -1,16 +1,18 @@
-import Entity from './entityClass.js';
+import Entity from '../entityClass.js';
+import Inventory from './inventory.js';
 
 class Player extends Entity {
   constructor(x, y, hp, pushOnFrame, speed=3.5) {
     super(x, y, hp, 'player', pushOnFrame);
+    this.dir = [];
+    this.inShift = false;
     this.speed = speed;
     this.prevSpeed = speed;
-    this.inShift = false;
-    this.dir = [];
-
+    
     // Meta
     this.crouchSpeedMultiplier = 0.365;
     this.lumberDamage = 20;
+    this.inventory = new Inventory(20);
 
     this.initEvents();
   }

@@ -49,6 +49,8 @@ class Tree extends Entity {
   }
 
   beforeDeath() {
+    this.shadow.remove();
+
     for (let i = 0; i < random.number(5,3); i++) {
       const randomTime = random.number(320, 50);
       setTimeout(() => {
@@ -58,7 +60,6 @@ class Tree extends Entity {
   }
 
   onDeath() {
-    this.shadow.remove();
     this.node.remove();
   }
 }
@@ -67,7 +68,7 @@ export default Tree;
 
 class woodenDrop extends Entity {
   constructor(x, y, pushOnFrame, player) {
-    super(x, y, 0, 'spruce-log-drop', pushOnFrame, true);
+    super(x, y, 0, 'spruce-log-drop', pushOnFrame, true, $.get('#ui-plane'));
     this.player = player;
 
     this.startX = x;

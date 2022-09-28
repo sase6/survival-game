@@ -167,4 +167,20 @@
 .layer {
   width: 100%;
   height: 100%;
+}
+
+#before-all-layer {
+  z-index: 1 !important;
+}
+
+#shadow-layer {
+  z-index: 2 !important;
+}
+
+#plane-1 {
+  z-index: 3 !important;
+}
+
+#ui-plane {
+  z-index: 4 !important;
 }/*# sourceMappingURL=style.css.map */
