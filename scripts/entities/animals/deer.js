@@ -14,6 +14,7 @@ class Deer extends Entity {
     this.speed = 0.85;
     this.maxTimeToWander = 15000;
     this.minTimeToWander = 3500;
+    this.playerAlertRange = 125;
 
     this.faceDirection();
     this.move();
@@ -36,6 +37,21 @@ class Deer extends Entity {
   }
 
   checkMove() {
+    const [playerX, playerY] = this.player.getOrigin(16);
+    const [nodeX, nodeY] = this.getOrigin(16);
+
+    if ((Math.abs(playerX - nodeX) <= this.playerAlertRange) && (Math.abs(playerY - nodeY) <= this.playerAlertRange) && this.player.speed >= 3.5) {
+      const isPlayerLeft = playerX < nodeX;
+      const isPlayerAbove = playerY < nodeY;
+      const goingHorizontally = random.percent(50);
+      
+      if (goingHorizontally) {
+        this.xDestination = isPlayerLeft? this.x + this.maxWanderRange : this.x - this.maxWanderRange;
+      } else {
+        this.yDestination = isPlayerAbove? this.y + this.maxWanderRange : this.y - this.maxWanderRange;
+      }
+    }
+
     if (this.xDestination && this.xDestination !== this.x) {
       if (Math.abs(this.xDestination - this.x) < this.speed) this.x = this.xDestination;
       else {
@@ -43,9 +59,9 @@ class Deer extends Entity {
         this.isLeft = this.xDestination < this.x;
       }
     }
-
+  
     if (this.yDestination && this.yDestination !== this.y) {
-      if (Math.abs(this.yDestination - this.y) < this.speed) this.y = this.yDestination;
+       if (Math.abs(this.yDestination - this.y) < this.speed) this.y = this.yDestination;
       else {
         this.y = this.yDestination > this.y? this.y + this.speed : this.y - this.speed;
       }
