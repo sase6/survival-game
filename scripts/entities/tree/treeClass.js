@@ -58,6 +58,7 @@ class Tree extends Entity {
   }
 
   onDeath() {
+    this.shadow.remove();
     this.node.remove();
   }
 }
