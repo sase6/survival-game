@@ -21,7 +21,7 @@
   width: 32px;
   height: 32px;
   border: 1px solid black;
-  background: indianred;
+  background: lightcoral;
 }
 
 .default-tree {
@@ -149,7 +149,7 @@
   height: 32px;
   border: 1px solid black;
   border: none;
-  background-color: lightskyblue;
+  background-color: #87cefa;
   z-index: 1 !important;
 }
 
