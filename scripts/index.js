@@ -1,8 +1,9 @@
 import Player from "./entities/player/player.js";
-import spawn from './entities/spawn.js';
+import Spawn from './entities/spawn.js';
 
 class World {
   constructor() {
+    // Global Variables
     this.perFrame = {};
     this.entityCount = 0;
 
@@ -12,22 +13,16 @@ class World {
       return this.entityCount - 1;
     }
 
-    this.pushOnFrame = (id, arrOfFuncs) => {
-      let arrOfFuncs = Array.isArray(arrOfFuncs)? arrOfFuncs : [arrOfFuncs];
-      if (this.perFrame[id] !== undefined) this.perFrame[i] === [...this.perFrame[id], ...arrOfFuncs];
-      else this.perFrame[i] = arrOfFuncs;
+    this.killOnFrame = (id) => delete this.perFrame[id];
+
+    this.pushOnFrame = (id, funcs) => {
+      let arrOfFuncs = Array.isArray(funcs)? funcs : [funcs];
+      if (this.perFrame[id] !== undefined) this.perFrame[id] = [...this.perFrame[id], ...arrOfFuncs];
+      else this.perFrame[id] = arrOfFuncs;
     };
 
-    // Global Entities
-    // this.player = new Player(0, 0, 100, this.pushOnFrame);
-
-    // Spawn Entities
-    // spawn.waterBodies(this.pushOnFrame, this.player);
-    // spawn.stones(1, this.pushOnFrame, this.player);
-    // spawn.grasses(15, this.pushOnFrame, this.player);
-    // spawn.deers(12.5, this.pushOnFrame, this.player);
-    // spawn.trees(40, 20, this.pushOnFrame, this.player);
-
+    // Start
+    new Spawn(this.pushOnFrame, this.killOnFrame, this.incrementEntity);
     this.loop();
   }
 

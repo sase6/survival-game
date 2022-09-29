@@ -3,8 +3,8 @@ import Inventory from './inventory.js';
 import $ from '../../helper/dom.js';
 
 class Player extends Entity {
-  constructor(x, y, hp, pushOnFrame, speed=3.5) {
-    super(x, y, hp, 'player', pushOnFrame);
+  constructor(x, y, hp=100, speed=3.5, pushOnFrame, killOnFrame, incrementEntity) {
+    super(x, y, hp, "player", pushOnFrame, killOnFrame, incrementEntity, true);
     this.dir = [];
     this.inShift = false;
     this.speed = speed;
@@ -52,7 +52,7 @@ class Player extends Entity {
       else if (isMoveKey && inDir) this.dir.splice(indexInDir, 1);
     });
 
-    this.pushOnFrame(() => this.checkMove());
+    this.pushOnFrame(this.entityId, [() => this.checkMove()]);
   }
 
   checkMove() {

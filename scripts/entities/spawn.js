@@ -1,3 +1,4 @@
+import Player from './player/player.js';
 import Tree from './tree/treeClass.js';
 import Grass from './environment/grassClass.js';
 import Deer from './animals/deer.js';
@@ -52,6 +53,19 @@ const waterBodies = (pushOnFrame, player, minAmt=1, maxAmt=3, xMax=700, yMax=500
   }
 };
 
-export default {
-  trees, grasses, deers, waterBodies, stones
+class Spawn {
+  constructor(pushOnFrame, killOnFrame, incrementEntity) {
+    this.pushOnFrame = pushOnFrame;
+    this.killOnFrame = killOnFrame;
+    this.incrementEntity = incrementEntity;
+
+    // Spawns
+    this.spawnPlayer();
+  }
+
+  spawnPlayer(x=0, y=0, hp=100) {
+    this.player = new Player(x, y, hp, 3.5, this.pushOnFrame, this.killOnFrame, this.incrementEntity);
+  }
 };
+
+export default Spawn
