@@ -17,7 +17,7 @@ class Spawn {
     // Spawns
     this.spawnPlayer();
     this.spawnWaterBodies();
-    // this.spawnStone();
+    this.spawnStone();
     this.spawnGrass();
     this.spawnTrees(35, 20);
     // this.spawnDeers();
@@ -56,8 +56,7 @@ class Spawn {
     for (let x = 1; x < xMax; x += 32) {
       for (let y = 1; y < yMax; y += 32) {
         if (this.grid[this.getGridIndex(x, y)] !== undefined || random.percent(97)) continue;
-        new Stone(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
-        this.addToGrid(x, y, 2);
+        new Stone(x, y, this);
       }
     }
   }
