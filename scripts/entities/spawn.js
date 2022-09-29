@@ -89,10 +89,10 @@ class Spawn {
     }
   }
 
-  spawnDeers(chance=30, xMax=1216, yMax=608, squareSize=128) {
+  spawnDeers(chance=10, xMax=1216, yMax=608, squareSize=128) {
     for (let x = 0; x < xMax; x += squareSize) {
       for (let y = 0; y < yMax; y += squareSize) {
-        if (random.percent(chance) && this.grid[this.getGridIndex(x, y + 96)]) {
+        if (random.percent(chance) && this.grid[this.getGridIndex(x, y + 96)] === undefined) {
           new Deer(x, (y + 64), this);
         }
       }
