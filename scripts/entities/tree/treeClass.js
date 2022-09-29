@@ -6,10 +6,7 @@ import $ from '../../helper/dom.js';
 class Tree extends Entity {
   constructor(x, y, spawn) {
     const treeHp = 300;
-    super(x, y, treeHp, 'default-tree', spawn, false, $.get('#plane-1'));
-    this.gridIndexes = [spawn.addToGrid(x, (y + 96), 2), spawn.addToGrid((x + 32), (y + 96), 2)];
-    this.incrementEntity = spawn.incrementEntity;
-    this.player = spawn.player;
+    super(spawn, 'default-tree', x, y, false, treeHp);
     
     // Meta
     this.interactRange = 48;
@@ -20,14 +17,23 @@ class Tree extends Entity {
     this.node.style.zIndex = `${parseInt(this.y + 128)}`;
     this.initEvents();
     this.addShadow();
+    this.setGridIndexes();
+  }
+
+  setGridIndexes() {
+    const yOffset = this.y + 96;
+    const xOffset = this.x + 32;
+    const gridIndex1 = this.spawn.addToGrid(this.x, yOffset, 2);
+    const gridIndex2 = this.spawn.addToGrid(xOffset, yOffset, 2);
+    this.gridIndexes = [gridIndex1, gridIndex2];
   }
 
   initEvents() {
     this.node.addEventListener("click", () => {
       if (this.health <= 0) return;
-      this.health -= this.player.lumberDamage;
+      this.health -= this.spawn.player.lumberDamage;
       const isDead = this.health <= 0;
-      const [playerOriginX, playerOriginY] = this.player.getOrigin();
+      const [playerOriginX, playerOriginY] = this.spawn.player.getOrigin();
       const [treeOriginX, treeOriginY] = this.getOrigin();
       const isCloseOnX = Math.abs(playerOriginX - treeOriginX) <= this.interactRange;
       const isCloseOnY = Math.abs(playerOriginY - treeOriginY) <= this.interactRange;
