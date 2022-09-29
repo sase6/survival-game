@@ -21,6 +21,8 @@ const grasses = (chance, pushOnFrame, player, xMax=1200, yMax=600, size=32) => {
       if (random.percent(chance)) {
         new Grass(x, y, pushOnFrame, player);
         if (random.percent(10)) new Mushroom(x, y-1, pushOnFrame, player);
+      } else if (random.percent(5)) {
+        new Grass(x, (y - 32), pushOnFrame, player, 'tall-grass');
       }
     }
   }

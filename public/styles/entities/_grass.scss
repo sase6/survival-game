@@ -1,6 +1,17 @@
-.default-grass {
-  @include defaultEntity();
+@mixin grass-commonalities {
   border: none;
   background: url('/public/assets/environment/grass.png');
   background-size: cover;
 }
+
+.default-grass {
+  @include defaultEntity();
+  @include grass-commonalities();
+}
+
+.tall-grass {
+  @include defaultEntity();
+  @include grass-commonalities();
+  height: 64px;
+  background: url('/public/assets/environment/tall-grass.png');
+} 

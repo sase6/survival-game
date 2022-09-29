@@ -118,6 +118,18 @@
   background-size: cover;
 }
 
+.tall-grass {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  border: none;
+  background: url("/public/assets/environment/grass.png");
+  background-size: cover;
+  height: 64px;
+  background: url("/public/assets/environment/tall-grass.png");
+}
+
 .deer {
   position: absolute;
   width: 32px;
