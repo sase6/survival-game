@@ -7,6 +7,7 @@ export default {
     class: 'spruce-log-drop',
     backgroundImage: 'url(/public/assets/tree/spruce-log-drop.png)',
     fallHeight: () => (128 - (random.number(16, 0))),
-    maxStack: 10
+    maxStack: 10,
+    placeable: true,
   }
 };

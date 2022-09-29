@@ -3,13 +3,12 @@ import $ from '../../helper/dom.js';
 import random from '../../helper/randomizer.js';
 
 class Drop {
-  constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player, dropId) {
+  constructor(x, y, spawn, dropId) {
     this.x = x;
     this.y = y; 
-    this.pushOnFrame = pushOnFrame;
-    this.killOnFrame = killOnFrame;
-    this.entityId = incrementEntity();
-    this.player = player;
+    this.spawn = spawn;
+    this.entityId = this.spawn.incrementEntity();
+    this.player = spawn.player;
     this.didMove = false;
     this.dropId = dropId;
     this.drop = dropMap[dropId];
@@ -20,7 +19,7 @@ class Drop {
     this.grabRange = 24;
 
     this.build();
-    this.pushOnFrame(this.entityId, () => this.onFrame());
+    spawn.pushOnFrame(this.entityId, () => this.onFrame());
   }
 
   build() {
@@ -65,7 +64,7 @@ class Drop {
 
   kill() {
     this.node.remove();
-    this.killOnFrame(this.entityId);
+    this.spawn.killOnFrame(this.entityId);
   }
 };
 

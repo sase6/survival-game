@@ -53,3 +53,10 @@ $water: #09C3DB;
 #shadow-layer {z-index: 2 !important;}
 #plane-1 {z-index: 3 !important;}
 #ui-plane {z-index: 4 !important;}
+
+.blob {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: black;
+}

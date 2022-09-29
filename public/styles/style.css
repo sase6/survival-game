@@ -256,4 +256,11 @@
 
 #ui-plane {
   z-index: 4 !important;
+}
+
+.blob {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: black;
 }/*# sourceMappingURL=style.css.map */

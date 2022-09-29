@@ -1,16 +1,13 @@
 import $ from '../helper/dom.js';
-const emptyFunc = () => {};
 
 class Entity {
-  constructor(x=0, y=0, hp=100, classes=[], pushOnFrame, killOnFrame, incrementEntity, renderOnFrame=false, parent=$.get('#plane-1'), addToGrid) {
+  constructor(x=0, y=0, hp=100, classes=[], spawn, renderOnFrame=false, parent=$.get('#plane-1')) {
     this.parent = parent;
     this.x = x;
     this.y = y;
     this.health = hp;
-    this.pushOnFrame = pushOnFrame;
-    this.killOnFrame = killOnFrame;
-    this.entityId = `entity-${incrementEntity()}`;
-    if (addToGrid) this.addToGrid = addToGrid;
+    this.spawn = spawn;
+    this.entityId = `entity-${spawn.incrementEntity()}`;
 
     this.build(classes, renderOnFrame);
   }
@@ -18,7 +15,7 @@ class Entity {
   build(classes, renderOnFrame) {
     this.node = $.make(classes);
     $.append(this.node, this.parent);
-    if (renderOnFrame) this.pushOnFrame(this.entityId, [() => this.renderPosition()]);
+    if (renderOnFrame) this.spawn.pushOnFrame(this.entityId, [() => this.renderPosition()]);
     else this.renderPosition();
   }
 
@@ -42,7 +39,13 @@ class Entity {
 
   kill() {
     this.node.remove();
-    this.killOnFrame(this.entityId);
+    this.spawn.killOnFrame(this.entityId);
+    if (this.gridIndexes !== undefined) {
+      this.gridIndexes.forEach(index => {
+        console.log(index);
+        this.spawn.grid[index] = undefined;
+      });
+    }
   }
 };
 

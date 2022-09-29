@@ -4,19 +4,22 @@ import random from '../../helper/randomizer.js';
 import $ from '../../helper/dom.js';
 
 class Tree extends Entity {
-  constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player) {
-    super(x, y, 300, 'default-tree', pushOnFrame, killOnFrame, incrementEntity, false, $.get('#plane-1'));
-    this.incrementEntity = incrementEntity;
-    this.player = player;
-    this.addShadow();
-    this.node.style.zIndex = `${parseInt(this.y + 128)}`;
+  constructor(x, y, spawn) {
+    const treeHp = 300;
+    super(x, y, treeHp, 'default-tree', spawn, false, $.get('#plane-1'));
+    this.gridIndexes = [spawn.addToGrid(x, (y + 96), 2), spawn.addToGrid((x + 32), (y + 96), 2)];
+    this.incrementEntity = spawn.incrementEntity;
+    this.player = spawn.player;
     
-    //Meta
+    // Meta
     this.interactRange = 48;
     this.shakeAnimationTime = 120;
     this.fallTime = 2000;
 
+    // Functions
+    this.node.style.zIndex = `${parseInt(this.y + 128)}`;
     this.initEvents();
+    this.addShadow();
   }
 
   initEvents() {
@@ -34,7 +37,7 @@ class Tree extends Entity {
         if (isDead) this.beforeDeath();
         setTimeout(() => {
           this.node.style.animation = "";
-          if (isDead) this.onDeath();
+          if (isDead) this.kill();
         }, (isDead? this.fallTime : this.shakeAnimationTime));
         
       } else return;
@@ -56,24 +59,12 @@ class Tree extends Entity {
     this.dropLoot();
   }
 
-  onDeath() {
-    this.node.remove();
-  }
-
   dropLoot() {
     for (let i = 0; i < random.number(5,3); i++) {
       const randomTime = random.number(320, 50);
-      setTimeout(() => {
-        new Drop(
-          this.x + random.number(54, 10),
-          this.y, 
-          this.pushOnFrame,
-          this.killOnFrame, 
-          this.incrementEntity, 
-          this.player, 
-          1
-        );
 
+      setTimeout(() => {
+        new Drop(this.x + random.number(54, 10), this.y, this.spawn, 1);
       }, randomTime);
     }
   }
