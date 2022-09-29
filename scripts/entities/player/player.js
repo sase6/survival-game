@@ -16,6 +16,7 @@ class Player extends Entity {
     // Meta
     this.crouchSpeedMultiplier = 0.365;
     this.inventory = new Inventory(20);
+    this.interactRange = 128;
     this.lumberDamage = 20;
 
     this.initEvents();
@@ -110,10 +111,19 @@ class Player extends Entity {
         x = x - (x%32);
         y = y - (y%32);
 
+        const originX = x + 16;
+        const originY = y + 16;
+        const [playerOriginX, playerOriginY] = this.getOrigin();
+        const notIXRange = Math.abs(playerOriginX - originX) > this.interactRange;
+        const notInYRange = Math.abs(playerOriginY - originY) > this.interactRange;
+
+        if (notIXRange || notInYRange) return;
+
         const gridIndex = this.spawn.getGridIndex(x, y);
         const gridBlock = this.spawn.grid[gridIndex];
 
         if (gridBlock !== undefined) return;
+
         new Block(this.spawn, x, y, item.id);
         this.inventory.removeFromInventory(this.currentSlot - 1);
       }
