@@ -1,10 +1,12 @@
 import Entity from '../entityClass.js';
+import Drop from '../drops/dropClass.js';
 import random from '../../helper/randomizer.js';
 import $ from '../../helper/dom.js';
 
 class Tree extends Entity {
   constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player) {
     super(x, y, 300, 'default-tree', pushOnFrame, killOnFrame, incrementEntity, false, $.get('#plane-1'));
+    this.incrementEntity = incrementEntity;
     this.player = player;
     this.addShadow();
     this.node.style.zIndex = `${parseInt(this.y + 128)}`;
@@ -55,7 +57,17 @@ class Tree extends Entity {
     for (let i = 0; i < random.number(5,3); i++) {
       const randomTime = random.number(320, 50);
       setTimeout(() => {
-        new woodenDrop(this.x + random.number(54, 10), this.y, this.pushOnFrame, this.player);
+        // new woodenDrop(this.x + random.number(54, 10), this.y, this.pushOnFrame, this.player);
+        new Drop(
+          this.x + random.number(54, 10),
+          this.y, 
+          this.pushOnFrame,
+          this.killOnFrame, 
+          this.incrementEntity, 
+          this.player, 
+          1
+        );
+
       }, randomTime);
     }
   }
