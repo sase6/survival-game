@@ -9,5 +9,9 @@ export default {
     fallHeight: () => (128 - (random.number(16, 0))),
     maxStack: 10,
     placeable: true,
+    block: {
+      gridType: 2,
+      class: 'spruce-log-block'
+    }
   }
 };

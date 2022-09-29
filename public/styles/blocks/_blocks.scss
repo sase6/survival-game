@@ -1,0 +1,18 @@
+// Trees
+.spruce-log-block {
+  @include defaultEntity();
+  border: none;
+  background: url('/public/assets/blocks/spruce-log-block.png');
+  background-size: cover;
+  animation: 200ms placeBlock;
+}
+
+@keyframes placeBlock {
+  25% {
+    transform: rotate(-10deg);
+  }
+
+  75% {
+    transform: rotate(10deg);
+  }
+}

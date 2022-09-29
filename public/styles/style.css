@@ -217,6 +217,35 @@
   background-size: cover;
 }
 
+.spruce-log-block {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  border: none;
+  background: url("/public/assets/blocks/spruce-log-block.png");
+  background-size: cover;
+  -webkit-animation: 200ms placeBlock;
+          animation: 200ms placeBlock;
+}
+
+@-webkit-keyframes placeBlock {
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes placeBlock {
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
 * {
   margin: 0;
   padding: 0;

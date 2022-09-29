@@ -1,3 +1,4 @@
+import Block from '../../blocks/blockClass.js';
 import Entity from '../entityClass.js';
 import Inventory from './inventory.js';
 import dropMap from '../drops/dropMap.js';
@@ -113,7 +114,7 @@ class Player extends Entity {
         const gridBlock = this.spawn.grid[gridIndex];
 
         if (gridBlock !== undefined) return;
-        new Entity(x, y, 100, 'blob', this.spawn, true);
+        new Block(this.spawn, x, y, item.id);
       }
     });
 
