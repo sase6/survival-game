@@ -3,8 +3,8 @@ import random from '../../helper/randomizer.js';
 import $ from '../../helper/dom.js';
 
 class WaterBody extends Entity {
-  constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player) {
-    super(x, y, 100, 'water-bodies', pushOnFrame, killOnFrame, incrementEntity, false, $.get('#before-all-layer'));
+  constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player, addToGrid) {
+    super(x, y, 100, 'water-bodies', pushOnFrame, killOnFrame, incrementEntity, false, $.get('#before-all-layer'), addToGrid);
     this.player = player;
 
     // Meta
@@ -12,6 +12,8 @@ class WaterBody extends Entity {
     this.yNumOfTiles = random.number(10, 3);
     this.matrix = this.getMatrix();
     this.populateMatrix();
+    this.lilySpawnPercent = 8;
+    this.reedSpawnPercent = 6;
     this.createWaterNodes(incrementEntity);
   };
 
@@ -54,6 +56,15 @@ class WaterBody extends Entity {
           const x = this.x + (32 * j);
           const y = this.y + (32 * i);
           new WaterNode(x, y, this.pushOnFrame, this.killOnFrame, incrementEntity, this.player);
+
+          if (random.percent(this.lilySpawnPercent)) {
+            const waterLily = new WaterLily(x, y, this.pushOnFrame, this.killOnFrame, incrementEntity, this.player);
+            const deg = random.valInArray([90, 180, 270, 360]);
+            waterLily.node.style.transform = `rotate(${deg}deg)`;
+          } else if (random.percent(this.reedSpawnPercent)) {
+            new WaterReed(x, y, this.pushOnFrame, this.killOnFrame, incrementEntity, this.player);
+          }
+          this.addToGrid(x, y, 2);
         }
       });
     });
@@ -63,6 +74,20 @@ class WaterBody extends Entity {
 class WaterNode extends Entity {
   constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player) {
     super(x, y, 0, 'water-node', pushOnFrame, killOnFrame, incrementEntity, false, $.get('#before-all-layer'));
+    this.player = player;
+  }
+};
+
+class WaterLily extends Entity {
+  constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player) {
+    super(x, y, 0, 'water-lily', pushOnFrame, killOnFrame, incrementEntity, false, $.get('#before-all-layer'));
+    this.player = player;
+  }
+};
+
+class WaterReed extends Entity {
+  constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player) {
+    super(x, y, 0, 'water-reed', pushOnFrame, killOnFrame, incrementEntity, false, $.get('#before-all-layer'));
     this.player = player;
   }
 };

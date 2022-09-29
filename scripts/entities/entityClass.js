@@ -2,7 +2,7 @@ import $ from '../helper/dom.js';
 const emptyFunc = () => {};
 
 class Entity {
-  constructor(x=0, y=0, hp=100, classes=[], pushOnFrame, killOnFrame, incrementEntity, renderOnFrame=false, parent=$.get('#plane-1')) {
+  constructor(x=0, y=0, hp=100, classes=[], pushOnFrame, killOnFrame, incrementEntity, renderOnFrame=false, parent=$.get('#plane-1'), addToGrid) {
     this.parent = parent;
     this.x = x;
     this.y = y;
@@ -10,6 +10,7 @@ class Entity {
     this.pushOnFrame = pushOnFrame;
     this.killOnFrame = killOnFrame;
     this.entityId = `entity-${incrementEntity()}`;
+    if (addToGrid) this.addToGrid = addToGrid;
 
     this.build(classes, renderOnFrame);
   }

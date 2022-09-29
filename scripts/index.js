@@ -6,6 +6,7 @@ class World {
     // Global Variables
     this.perFrame = {};
     this.entityCount = 0;
+    this.grid = new Array((19 * 38)); //Pixel Area of Game /32
 
     // Functions
     this.incrementEntity = () => {
@@ -22,7 +23,7 @@ class World {
     };
 
     // Start
-    new Spawn(this.pushOnFrame, this.killOnFrame, this.incrementEntity);
+    new Spawn(this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.grid);
     this.loop();
   }
 

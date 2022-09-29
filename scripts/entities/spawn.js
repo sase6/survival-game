@@ -46,14 +46,23 @@ import random from '../helper/randomizer.js';
 // };
 
 class Spawn {
-  constructor(pushOnFrame, killOnFrame, incrementEntity) {
+  constructor(pushOnFrame, killOnFrame, incrementEntity, grid) {
     this.pushOnFrame = pushOnFrame;
     this.killOnFrame = killOnFrame;
     this.incrementEntity = incrementEntity;
+    this.grid = grid;
 
     // Spawns
     this.spawnPlayer();
     this.spawnWaterBodies();
+  }
+
+  addToGrid(x, y, storage) {
+    const snappedX = Math.floor(x / 32);                                                                                                                                                                                
+    const snappedY = Math.floor(y / 32); 
+    const rowMultiplier = snappedY * 19;
+    
+    this.grid[rowMultiplier + snappedX] = storage;
   }
 
   spawnPlayer(x=0, y=0, hp=100) {
@@ -62,11 +71,15 @@ class Spawn {
 
   spawnWaterBodies(minBodiesOfWater=1, maxBodiesOfWater=3, xMax=700, yMax=500) {
     for (let i = 0; i < random.number(maxBodiesOfWater, minBodiesOfWater); i++) {
-      const x = random.number(xMax, 50);
-      const y = random.number(yMax, 50);
-      new WaterBody(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+      const x = random.snappedValue(xMax, 50);
+      const y = random.snappedValue(yMax, 50);
+      new WaterBody(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player, (x,y,s) => this.addToGrid(x,y,s));
     }
   }
 };
 
 export default Spawn
+
+// Grid Codes
+// 1. Unspawnable
+// 2. Unspawnable/ Unable to walk on

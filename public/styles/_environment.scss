@@ -1,10 +1,25 @@
-.water-node {
+
+// Water Nodes
+@mixin waterNode {
   @include defaultEntity();
   border: none;
-  background-color: #87cefa;
   z-index: 1 !important;
 }
+.water-node {
+  @include waterNode();
+  background-color: #87cefa;
+}
+.water-lily {
+  @include waterNode();
+  background: url('/public/assets/environment/lily-pad.png');
+}
+.water-reed {
+  @include waterNode();
+  background: url('/public/assets/environment/reeds.png');
+}
 
+
+// Stones
 .stone {
   @include defaultEntity();
   border: none;
@@ -12,6 +27,7 @@
   background-size: cover;
 }
 
+// Vegetation
 .purple-mushroom {
   @include defaultEntity();
   border: none;
