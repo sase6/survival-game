@@ -53,11 +53,17 @@ class Tree extends Entity {
 
   beforeDeath() {
     this.shadow.remove();
+    this.dropLoot();
+  }
 
+  onDeath() {
+    this.node.remove();
+  }
+
+  dropLoot() {
     for (let i = 0; i < random.number(5,3); i++) {
       const randomTime = random.number(320, 50);
       setTimeout(() => {
-        // new woodenDrop(this.x + random.number(54, 10), this.y, this.pushOnFrame, this.player);
         new Drop(
           this.x + random.number(54, 10),
           this.y, 
@@ -71,48 +77,6 @@ class Tree extends Entity {
       }, randomTime);
     }
   }
-
-  onDeath() {
-    this.node.remove();
-  }
 }
 
 export default Tree;
-
-class woodenDrop extends Entity {
-  constructor(x, y, pushOnFrame, player) {
-    super(x, y, 0, 'spruce-log-drop', pushOnFrame, true, $.get('#ui-plane'));
-    this.player = player;
-
-    this.startX = x;
-    this.startY = y;
-    this.interactRange = 150;
-    this.grabRange = 32;
-    this.speed = 1;
-    this.moved = false;
-    this.pushOnFrame(() => {this.chasePlayer()});
-  }
-
-  chasePlayer() {
-    let [playerX, playerY] = this.player.getOrigin(16);
-    let [nodeX, nodeY] = this.getOrigin(8);
-
-    const inHorizontalRange = Math.abs(playerX - nodeX) <= this.interactRange;
-    const inVerticalRange = Math.abs(playerY - nodeY) <= this.interactRange;
-    const inHorizontalGrabRange = Math.abs(playerX - nodeX) <= this.grabRange;
-    const inVerticalGrabRange = Math.abs(playerY - nodeY) <= this.grabRange;
-
-    if (inHorizontalGrabRange && inVerticalGrabRange) return this.node.remove();
-
-    if (inHorizontalRange && inVerticalRange) {
-      this.moved = true;
-      if (playerX < nodeX) this.x -= this.speed;
-      else this.x += this.speed;
-
-      if (playerY < nodeY) this.y -= this.speed;
-      else this.y += this.speed;
-    } else if (this.y < (this.startY + 128) && !this.moved) {
-      this.y += this.speed;
-    }
-  }
-};

@@ -4,7 +4,7 @@ $slot-width: 48px;
   position: absolute;
   width: 240px;
   height: $slot-width;
-  z-index: 99999;
+  z-index: 99999 !important;
   top: calc(100% - 56px);
   left: calc(50% - 120px);
   display: grid;
@@ -16,4 +16,9 @@ $slot-width: 48px;
   background: url('/public/assets/ui/inventory-slot.png');
   background-size: cover;
   opacity: 0.85;
+  border: 1px solid transparent;
 } 
+
+.drop {
+  z-index: 99998 !important;
+}

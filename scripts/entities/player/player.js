@@ -35,8 +35,7 @@ class Player extends Entity {
         this.speed = Math.ceil(this.speed * this.crouchSpeedMultiplier);
       }
       else if (isMoveKey && notInDir) this.dir.unshift(key);
-      
-      if (!isNaN(keyInNum) && keyInNum < 5 && keyInNum > 0) this.switchSlots(keyInNum);
+      else if (!isNaN(keyInNum) && keyInNum < 5 && keyInNum > 0) this.switchSlots(keyInNum);
     });
 
     document.addEventListener("keyup", (e) => {
@@ -66,8 +65,8 @@ class Player extends Entity {
   }
 
   switchSlots(slotNumber) {
-    if (slotNumber === 5) slotNumber = 1;
-    else if  (slotNumber === 0) slotNumber = 4;
+    if (slotNumber > 4) slotNumber = 1;
+    else if  (slotNumber < 1) slotNumber = 4;
 
     const oldSlot = $.get(`hotbar-slot-${this.currentSlot}`);
     const newSlot = $.get(`hotbar-slot-${slotNumber}`);

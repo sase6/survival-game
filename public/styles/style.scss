@@ -27,9 +27,9 @@ $water: #09C3DB;
   margin: 0;
   padding: 0;
   font-family: sans-serif; //Roboto Later
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
+  image-rendering: pixelated !important;
+  // image-rendering: -moz-crisp-edges !important;
+  // image-rendering: crisp-edges !important;
 }
 
 #app {
