@@ -57,6 +57,15 @@ class Inventory {
     this.renderHotbar();
   }
 
+  removeFromInventory(slotNumber, amt=1) {
+    this.slots[slotNumber].amountOfItems -= amt;
+    if (this.slots[slotNumber].amountOfItems === 0) {
+      this.slots[slotNumber] = this.newSlot();
+    }
+
+    this.renderHotbar();
+  }
+
   renderHotbar() {
     const hotbar = this.slots.slice(0, 4);
     for (let i = 0; i < hotbar.length; i++) {
@@ -64,7 +73,7 @@ class Inventory {
       if (slot.id) {
         $.get(`hotbar-slot-item-${i + 1}`).style.background = dropMap[slot.id].backgroundImage;
         $.get(`hotbar-slot-item-${i + 1}`).style.backgroundSize = "cover";
-      }
+      } else $.get(`hotbar-slot-item-${i + 1}`).style.background = "transparent";
       $.get(`hotbar-slot-number-${i + 1}`).innerText = slot.amountOfItems > 0? slot.amountOfItems : "";
     }
   }

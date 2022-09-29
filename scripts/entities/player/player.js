@@ -115,6 +115,7 @@ class Player extends Entity {
 
         if (gridBlock !== undefined) return;
         new Block(this.spawn, x, y, item.id);
+        this.inventory.removeFromInventory(this.currentSlot - 1);
       }
     });
 
