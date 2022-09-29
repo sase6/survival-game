@@ -18,7 +18,7 @@ class Spawn {
     this.spawnPlayer();
     this.spawnWaterBodies();
     // this.spawnStone();
-    // this.spawnGrass();
+    this.spawnGrass();
     this.spawnTrees(35, 20);
     // this.spawnDeers();
   }
@@ -68,12 +68,12 @@ class Spawn {
         if (this.grid[this.getGridIndex(x, y)] !== undefined) continue;
         if (random.percent(80)) continue;
 
-        if (random.percent(15)) new Grass(x, (y - 32), this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player, 'tall-grass');
+        if (random.percent(15)) new Grass(x, (y - 32), this, 'tall-grass');
         else if (random.percent(5)) {
-          new Mushroom(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
-          new Grass(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+          new Mushroom(x, y, this);
+          new Grass(x, y, this);
         }
-        else new Grass(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+        else new Grass(x, y, this);
       }
     }
   }
