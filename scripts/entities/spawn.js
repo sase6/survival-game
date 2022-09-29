@@ -7,22 +7,6 @@ import Stone from './environment/stoneClass.js';
 import Mushroom from './environment/mushroom.js';
 import random from '../helper/randomizer.js';
 
-// const stones = (chance, pushOnFrame, player, xMax=1200, yMax=600, size=32) => {
-//   for (let x = 0; x < xMax; x += size) {
-//     for (let y = 0; y < yMax; y += size) {
-//       if (random.percent(chance)) new Stone(x, y, pushOnFrame, player);
-//     }
-//   }
-// };
-
-// const deers = (chance, pushOnFrame, player, xMax=1200, yMax=600, size=128) => {
-//   for (let x = 0; x < xMax; x += size) {
-//     for (let y = 0; y < yMax; y += size) {
-//       if (random.percent(chance)) new Deer(x, y, pushOnFrame, player);
-//     }
-//   }
-// };
-
 class Spawn {
   constructor(pushOnFrame, killOnFrame, incrementEntity, grid) {
     this.pushOnFrame = pushOnFrame;
@@ -36,6 +20,7 @@ class Spawn {
     this.spawnStone();
     this.spawnGrass();
     this.spawnTrees(35, 20);
+    this.spawnDeers();
   }
 
   getGridIndex(x, y) {
@@ -98,7 +83,18 @@ class Spawn {
       let y = random.snappedValue(472, 32);
 
       if (this.grid[this.getGridIndex(x, (y + 96))] !== undefined) continue;
+      this.addToGrid(x, (y + 96));
       new Tree(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+    }
+  }
+
+  spawnDeers(chance=30, xMax=1216, yMax=608, squareSize=128) {
+    for (let x = 0; x < xMax; x += squareSize) {
+      for (let y = 0; y < yMax; y += squareSize) {
+        if (random.percent(chance) && this.grid[this.getGridIndex(x, y + 96)]) {
+          new Deer(x, (y + 64), this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+        }
+      }
     }
   }
 };

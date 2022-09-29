@@ -3,8 +3,8 @@ import random from '../../helper/randomizer.js';
 import $ from '../../helper/dom.js';
 
 class Deer extends Entity {
-  constructor(x, y, pushOnFrame, player) {
-    super(x, y, 60, ['default_entity', 'deer'], pushOnFrame, false);
+  constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player) {
+    super(x, y, 60, ['default_entity', 'deer'], pushOnFrame, killOnFrame, incrementEntity, false, $.get("#plane-1"));
     this.player = player;
     this.isLeft = random.percent(50);
 
@@ -18,7 +18,7 @@ class Deer extends Entity {
 
     this.faceDirection();
     this.move();
-    this.pushOnFrame(() => this.checkMove());
+    this.pushOnFrame(this.entityId, () => this.checkMove());
   }
 
   faceDirection() {
@@ -62,7 +62,7 @@ class Deer extends Entity {
   
     if (this.yDestination && this.yDestination !== this.y) {
        if (Math.abs(this.yDestination - this.y) < this.speed) this.y = this.yDestination;
-      else {
+       else {
         this.y = this.yDestination > this.y? this.y + this.speed : this.y - this.speed;
       }
     }
@@ -71,7 +71,7 @@ class Deer extends Entity {
     $.css(this.node, [
       ['top', this.y, 'px'],
       ['left', this.x, 'px'],
-      ['zIndex', (this.y + 64).toString(), '']
+      ['zIndex', parseInt(this.y + 64), '']
     ]);
   }
 };
