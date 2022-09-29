@@ -55,14 +55,22 @@ class Spawn {
     // Spawns
     this.spawnPlayer();
     this.spawnWaterBodies();
+    this.spawnGrass();
   }
 
-  addToGrid(x, y, storage) {
+  getGridIndex(x, y) {
     const snappedX = Math.floor(x / 32);                                                                                                                                                                                
     const snappedY = Math.floor(y / 32); 
     const rowMultiplier = snappedY * 19;
-    
-    this.grid[rowMultiplier + snappedX] = storage;
+    return rowMultiplier + snappedX;
+  }
+
+  addToGrid(x, y, storage) {
+    this.grid[this.getGridIndex(x, y)] = storage;
+  }
+
+  checkGrid(x, y) {
+    return this.grid[this.getGridIndex(x, y)];
   }
 
   spawnPlayer(x=0, y=0, hp=100) {
@@ -74,6 +82,22 @@ class Spawn {
       const x = random.snappedValue(xMax, 50);
       const y = random.snappedValue(yMax, 50);
       new WaterBody(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player, (x,y,s) => this.addToGrid(x,y,s));
+    }
+  }
+
+  spawnGrass(xMax=1184, yMax=772) {
+    for (let x = 1; x < xMax; x += 32) {
+      for (let y = 1; y < yMax; y += 32) {
+        if (this.grid[this.getGridIndex(x, y)] !== undefined) continue;
+        if (random.percent(80)) continue;
+
+        if (random.percent(15)) new Grass(x, (y - 32), this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player, 'tall-grass');
+        else if (random.percent(5)) {
+          new Mushroom(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+          new Grass(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+        }
+        else new Grass(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+      }
     }
   }
 };

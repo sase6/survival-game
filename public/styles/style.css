@@ -107,7 +107,7 @@
     transform: translateY(128px);
   }
 }
-.default-grass {
+.grass {
   position: absolute;
   width: 32px;
   height: 32px;
