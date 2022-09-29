@@ -149,7 +149,7 @@
   border: 1px solid black;
   border: none;
   z-index: 1 !important;
-  background-color: #87cefa;
+  background-color: #09C3DB;
   z-index: 1 !important;
 }
 
@@ -212,7 +212,7 @@
   top: calc(50vh - 304px);
   left: calc(50vw - 608px);
   border: 1px solid black;
-  background: olivedrab;
+  background: #348C31;
   overflow: hidden;
 }
 

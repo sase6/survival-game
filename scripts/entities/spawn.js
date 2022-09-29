@@ -33,6 +33,7 @@ class Spawn {
     // Spawns
     this.spawnPlayer();
     this.spawnWaterBodies();
+    this.spawnStone();
     this.spawnGrass();
     this.spawnTrees(35, 20);
   }
@@ -61,6 +62,15 @@ class Spawn {
       const x = random.snappedValue(xMax, 50);
       const y = random.snappedValue(yMax, 50);
       new WaterBody(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player, (x,y,s) => this.addToGrid(x,y,s));
+    }
+  }
+
+  spawnStone(xMax=1184, yMax=772) {
+    for (let x = 1; x < xMax; x += 32) {
+      for (let y = 1; y < yMax; y += 32) {
+        if (this.grid[this.getGridIndex(x, y)] !== undefined || random.percent(97)) continue;
+        new Stone(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+      }
     }
   }
 
@@ -93,7 +103,7 @@ class Spawn {
   }
 };
 
-export default Spawn
+export default Spawn;
 
 // Grid Codes
 // 1. Unspawnable

@@ -7,7 +7,7 @@
 }
 .water-node {
   @include waterNode();
-  background-color: #87cefa;
+  background-color: $water;
   z-index: 1 !important;
 }
 .water-lily {

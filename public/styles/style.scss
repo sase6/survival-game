@@ -4,6 +4,8 @@
 $gameWidth: 1216px;
 $gameHeight: 608px;
 $blackBorder: 1px solid black;
+$grass: #348C31;
+$water: #09C3DB;
 
 @mixin defaultEntity {
   position: absolute;
@@ -37,7 +39,8 @@ $blackBorder: 1px solid black;
   top: calc(50vh - 304px);
   left: calc(50vw - 608px);
   border: $blackBorder;
-  background: olivedrab;
+  // background: olivedrab; 
+  background: $grass;
   overflow: hidden;
 }
 
