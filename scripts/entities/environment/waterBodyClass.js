@@ -3,8 +3,8 @@ import random from '../../helper/randomizer.js';
 import $ from '../../helper/dom.js';
 
 class WaterBody extends Entity {
-  constructor(x, y, pushOnFrame, player) {
-    super(x, y, 0, 'water-body-container', pushOnFrame, false, $.get('#plane1'));
+  constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player) {
+    super(x, y, 100, 'water-bodies', pushOnFrame, killOnFrame, incrementEntity, false, $.get('#before-all-layer'));
     this.player = player;
 
     // Meta
@@ -12,7 +12,7 @@ class WaterBody extends Entity {
     this.yNumOfTiles = random.number(10, 3);
     this.matrix = this.getMatrix();
     this.populateMatrix();
-    this.createWaterNodes();
+    this.createWaterNodes(incrementEntity);
   };
 
   getMatrix() {
@@ -47,11 +47,13 @@ class WaterBody extends Entity {
     return fill();
   }
 
-  createWaterNodes() {
+  createWaterNodes(incrementEntity) {
     this.matrix.forEach((row, i) => {
       row.forEach((node, j) => {
         if (node === 1) {
-          new WaterNode(this.x + (32 * j), this.y + (32 * i), this.pushOnFrame, this.player);
+          const x = this.x + (32 * j);
+          const y = this.y + (32 * i);
+          new WaterNode(x, y, this.pushOnFrame, this.killOnFrame, incrementEntity, this.player);
         }
       });
     });
@@ -59,8 +61,8 @@ class WaterBody extends Entity {
 };
 
 class WaterNode extends Entity {
-  constructor(x, y, pushOnFrame, player) {
-    super(x, y, 0, 'water-node', pushOnFrame, false);
+  constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player) {
+    super(x, y, 0, 'water-node', pushOnFrame, killOnFrame, incrementEntity, false, $.get('#before-all-layer'));
     this.player = player;
   }
 };
