@@ -20,7 +20,7 @@ class Spawn {
     this.spawnStone();
     this.spawnGrass();
     this.spawnTrees(35, 20);
-    // this.spawnDeers();
+    this.spawnDeers();
   }
 
   getGridIndex(x, y) {
@@ -93,7 +93,7 @@ class Spawn {
     for (let x = 0; x < xMax; x += squareSize) {
       for (let y = 0; y < yMax; y += squareSize) {
         if (random.percent(chance) && this.grid[this.getGridIndex(x, y + 96)]) {
-          new Deer(x, (y + 64), this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+          new Deer(x, (y + 64), this);
         }
       }
     }

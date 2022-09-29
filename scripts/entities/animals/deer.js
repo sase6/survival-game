@@ -3,9 +3,8 @@ import random from '../../helper/randomizer.js';
 import $ from '../../helper/dom.js';
 
 class Deer extends Entity {
-  constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player) {
-    super(x, y, 60, ['default_entity', 'deer'], pushOnFrame, killOnFrame, incrementEntity, false, $.get("#plane-1"));
-    this.player = player;
+  constructor(x, y, spawn) {
+    super(spawn, 'deer', x, y, false, 60);
     this.isLeft = random.percent(50);
 
     // Meta
@@ -18,7 +17,7 @@ class Deer extends Entity {
 
     this.faceDirection();
     this.move();
-    this.pushOnFrame(this.entityId, () => this.checkMove());
+    this.spawn.pushOnFrame(this.entityId, () => this.checkMove());
   }
 
   faceDirection() {
@@ -37,10 +36,10 @@ class Deer extends Entity {
   }
 
   checkMove() {
-    const [playerX, playerY] = this.player.getOrigin(16);
+    const [playerX, playerY] = this.spawn.player.getOrigin(16);
     const [nodeX, nodeY] = this.getOrigin(16);
 
-    if ((Math.abs(playerX - nodeX) <= this.playerAlertRange) && (Math.abs(playerY - nodeY) <= this.playerAlertRange) && this.player.speed >= 3.5) {
+    if ((Math.abs(playerX - nodeX) <= this.playerAlertRange) && (Math.abs(playerY - nodeY) <= this.playerAlertRange) && this.spawn.player.speed >= 3.5) {
       const isPlayerLeft = playerX < nodeX;
       const isPlayerAbove = playerY < nodeY;
       const goingHorizontally = random.percent(50);
