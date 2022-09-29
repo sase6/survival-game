@@ -7,6 +7,7 @@ class Entity {
     this.health = hp;
     this.spawn = spawn;
     this.entityId = `entity-${spawn.incrementEntity()}`;
+    this.player = this.spawn.player;
 
     this.build(classes, renderOnFrame, parent);
   }

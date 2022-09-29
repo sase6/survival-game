@@ -16,7 +16,7 @@ class Spawn {
 
     // Spawns
     this.spawnPlayer();
-    // this.spawnWaterBodies();
+    this.spawnWaterBodies();
     // this.spawnStone();
     // this.spawnGrass();
     this.spawnTrees(35, 20);
@@ -44,39 +44,39 @@ class Spawn {
     this.player = new Player(x, y, this);
   }
 
-  // spawnWaterBodies(minBodiesOfWater=1, maxBodiesOfWater=3, xMax=700, yMax=500) {
-  //   for (let i = 0; i < random.number(maxBodiesOfWater, minBodiesOfWater); i++) {
-  //     const x = random.snappedValue(xMax, 50);
-  //     const y = random.snappedValue(yMax, 50);
-  //     new WaterBody(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player, (x,y,s) => this.addToGrid(x,y,s));
-  //   }
-  // }
+  spawnWaterBodies(minBodiesOfWater=1, maxBodiesOfWater=3, xMax=700, yMax=500) {
+    for (let i = 0; i < random.number(maxBodiesOfWater, minBodiesOfWater); i++) {
+      const x = random.snappedValue(xMax, 50);
+      const y = random.snappedValue(yMax, 50);
+      new WaterBody(x, y, this);
+    }
+  }
 
-  // spawnStone(xMax=1184, yMax=772) {
-  //   for (let x = 1; x < xMax; x += 32) {
-  //     for (let y = 1; y < yMax; y += 32) {
-  //       if (this.grid[this.getGridIndex(x, y)] !== undefined || random.percent(97)) continue;
-  //       new Stone(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
-  //       this.addToGrid(x, y, 2);
-  //     }
-  //   }
-  // }
+  spawnStone(xMax=1184, yMax=772) {
+    for (let x = 1; x < xMax; x += 32) {
+      for (let y = 1; y < yMax; y += 32) {
+        if (this.grid[this.getGridIndex(x, y)] !== undefined || random.percent(97)) continue;
+        new Stone(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+        this.addToGrid(x, y, 2);
+      }
+    }
+  }
 
-  // spawnGrass(xMax=1184, yMax=772) {
-  //   for (let x = 1; x < xMax; x += 32) {
-  //     for (let y = 1; y < yMax; y += 32) {
-  //       if (this.grid[this.getGridIndex(x, y)] !== undefined) continue;
-  //       if (random.percent(80)) continue;
+  spawnGrass(xMax=1184, yMax=772) {
+    for (let x = 1; x < xMax; x += 32) {
+      for (let y = 1; y < yMax; y += 32) {
+        if (this.grid[this.getGridIndex(x, y)] !== undefined) continue;
+        if (random.percent(80)) continue;
 
-  //       if (random.percent(15)) new Grass(x, (y - 32), this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player, 'tall-grass');
-  //       else if (random.percent(5)) {
-  //         new Mushroom(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
-  //         new Grass(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
-  //       }
-  //       else new Grass(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
-  //     }
-  //   }
-  // }
+        if (random.percent(15)) new Grass(x, (y - 32), this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player, 'tall-grass');
+        else if (random.percent(5)) {
+          new Mushroom(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+          new Grass(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+        }
+        else new Grass(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+      }
+    }
+  }
 
   spawnTrees(max, min) {
     let maxTrees = parseInt(random.number(max, min));
@@ -90,15 +90,15 @@ class Spawn {
     }
   }
 
-  // spawnDeers(chance=30, xMax=1216, yMax=608, squareSize=128) {
-  //   for (let x = 0; x < xMax; x += squareSize) {
-  //     for (let y = 0; y < yMax; y += squareSize) {
-  //       if (random.percent(chance) && this.grid[this.getGridIndex(x, y + 96)]) {
-  //         new Deer(x, (y + 64), this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
-  //       }
-  //     }
-  //   }
-  // }
+  spawnDeers(chance=30, xMax=1216, yMax=608, squareSize=128) {
+    for (let x = 0; x < xMax; x += squareSize) {
+      for (let y = 0; y < yMax; y += squareSize) {
+        if (random.percent(chance) && this.grid[this.getGridIndex(x, y + 96)]) {
+          new Deer(x, (y + 64), this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
+        }
+      }
+    }
+  }
 };
 
 export default Spawn;
