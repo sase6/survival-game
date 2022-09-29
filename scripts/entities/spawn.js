@@ -34,7 +34,7 @@ class Spawn {
     this.spawnPlayer();
     this.spawnWaterBodies();
     this.spawnGrass();
-    this.spawnTrees(25, 15);
+    this.spawnTrees(35, 20);
   }
 
   getGridIndex(x, y) {
@@ -81,13 +81,13 @@ class Spawn {
   }
 
   spawnTrees(max, min) {
-    let maxTrees = random.number(max, min);
+    let maxTrees = parseInt(random.number(max, min));
 
     for (let i = 0; i < maxTrees; i++) {
       let x = random.snappedValue(1072, 32);
       let y = random.snappedValue(472, 32);
 
-      if (this.grid[this.getGridIndex(x, (y + 96))] !== undefined) return;
+      if (this.grid[this.getGridIndex(x, (y + 96))] !== undefined) continue;
       new Tree(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
     }
   }
