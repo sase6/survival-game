@@ -10,7 +10,7 @@
 }
 
 .hotbar-slot {
-  background-color: red;
+  position: relative;
   background: url("/public/assets/ui/inventory-slot.png");
   background-size: cover;
   opacity: 0.85;
