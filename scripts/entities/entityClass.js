@@ -2,12 +2,13 @@ import $ from '../helper/dom.js';
 const emptyFunc = () => {};
 
 class Entity {
-  constructor(x=0, y=0, hp=100, classes=[], pushOnFrame=emptyFunc, incrementEntity, renderOnFrame=false, parent=$.get('#plane-1')) {
+  constructor(x=0, y=0, hp=100, classes=[], pushOnFrame=emptyFunc, incrementEntity, killOnFrame, renderOnFrame=false, parent=$.get('#plane-1')) {
     this.parent = parent;
     this.x = x;
     this.y = y;
     this.health = hp;
     this.pushOnFrame = pushOnFrame;
+    this.killOnFrame = killOnFrame;
     this.entityId = `entity-${incrementEntity()}`;
 
     this.build(classes, renderOnFrame);
@@ -36,6 +37,11 @@ class Entity {
     const originX = ((selfRect.right - selfRect.left) / 2) + this.x;
     const originY = (selfRect.bottom - selfRect.top) + (yPosition || this.y) - offsetBottom;
     return [originX, originY];
+  }
+
+  kill() {
+    this.node.remove();
+    this.killOnFrame(this.entityId);
   }
 };
 
