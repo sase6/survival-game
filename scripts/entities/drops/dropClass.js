@@ -11,6 +11,7 @@ class Drop {
     this.entityId = incrementEntity();
     this.player = player;
     this.didMove = false;
+    this.dropId = dropId;
     this.drop = dropMap[dropId];
     this.dropDestinationY = this.y + this.drop.fallHeight();
     this.dropSpeed = 3;
@@ -45,6 +46,7 @@ class Drop {
 
     if (isHorizontallyInGrabRange && isVerticallyInGrabRange) {
       this.kill();
+      this.player.inventory.addToSlot(this.dropId);
     } else if (isHorizontallyClose && isVerticallyClose) {
       this.didMove = true;
 
