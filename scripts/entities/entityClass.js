@@ -2,12 +2,13 @@ import $ from '../helper/dom.js';
 const emptyFunc = () => {};
 
 class Entity {
-  constructor(x=0, y=0, hp=100, classes=[], pushOnFrame=emptyFunc, renderOnFrame=true, parent=$.get('#plane-1')) {
+  constructor(x=0, y=0, hp=100, classes=[], pushOnFrame=emptyFunc, incrementEntity, renderOnFrame=false, parent=$.get('#plane-1')) {
     this.parent = parent;
     this.x = x;
     this.y = y;
     this.health = hp;
     this.pushOnFrame = pushOnFrame;
+    this.entityId = `entity-${incrementEntity()}`;
 
     this.build(classes, renderOnFrame);
   }
@@ -15,7 +16,7 @@ class Entity {
   build(classes, renderOnFrame) {
     this.node = $.make(classes);
     $.append(this.node, this.parent);
-    if (renderOnFrame) this.pushOnFrame(() => this.renderPosition());
+    if (renderOnFrame) this.pushOnFrame(this.entityId, [() => this.renderPosition()]);
     else this.renderPosition();
   }
 

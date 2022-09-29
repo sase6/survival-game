@@ -7,7 +7,11 @@ class World {
     this.entityCount = 0;
 
     // Functions
-    this.incrementEntity = () => this.entityCount++;
+    this.incrementEntity = () => {
+      this.entityCount++;
+      return this.entityCount - 1;
+    }
+
     this.pushOnFrame = (id, arrOfFuncs) => {
       let arrOfFuncs = Array.isArray(arrOfFuncs)? arrOfFuncs : [arrOfFuncs];
       if (this.perFrame[id] !== undefined) this.perFrame[i] === [...this.perFrame[id], ...arrOfFuncs];
@@ -15,7 +19,7 @@ class World {
     };
 
     // Global Entities
-    this.player = new Player(0, 0, 100, this.pushOnFrame);
+    // this.player = new Player(0, 0, 100, this.pushOnFrame);
 
     // Spawn Entities
     // spawn.waterBodies(this.pushOnFrame, this.player);
