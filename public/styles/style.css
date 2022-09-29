@@ -18,9 +18,8 @@
 
 .player {
   position: absolute;
-  width: 32px;
-  height: 32px;
-  border: 1px solid black;
+  width: 32px !important;
+  height: 32px !important;
   background: lightcoral;
 }
 
@@ -185,10 +184,10 @@
 
 #app {
   position: relative;
-  width: 1200px;
-  height: 600px;
-  top: calc(50vh - 300px);
-  left: calc(50vw - 600px);
+  width: 1216px;
+  height: 608px;
+  top: calc(50vh - 304px);
+  left: calc(50vw - 608px);
   border: 1px solid black;
   background: olivedrab;
   overflow: hidden;

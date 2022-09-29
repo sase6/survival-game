@@ -14,6 +14,11 @@ const percent = (percentage) => {
   return randomNum <= percentage;
 };
 
+const snappedValue = (max, min, snapNumber=32) => {
+  const randomNum = number(max, min);
+  return randomNum - (randomNum % snapNumber);
+};
+
 export default {
-  number, valInArray, percent
+  number, valInArray, percent, snappedValue,
 };

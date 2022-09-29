@@ -1,8 +1,8 @@
 // High Level Imports
 
 // Variables
-$gameWidth: 1200px;
-$gameHeight: 600px;
+$gameWidth: 1216px;
+$gameHeight: 608px;
 $blackBorder: 1px solid black;
 
 @mixin defaultEntity {
@@ -18,7 +18,7 @@ $blackBorder: 1px solid black;
 @import './entities/tree';
 @import './entities/grass';
 @import './entities/animals';
-@import './_environment.scss' ;
+@import './_environment.scss'; 
 
 // Styles
 * {
@@ -34,8 +34,8 @@ $blackBorder: 1px solid black;
   position: relative;
   width: $gameWidth;
   height: $gameHeight;
-  top: calc(50vh - 300px);
-  left: calc(50vw - 600px);
+  top: calc(50vh - 304px);
+  left: calc(50vw - 608px);
   border: $blackBorder;
   background: olivedrab;
   overflow: hidden;
