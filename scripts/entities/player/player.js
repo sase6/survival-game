@@ -5,7 +5,7 @@ import $ from '../../helper/dom.js';
 
 class Player extends Entity {
   constructor(x, y, spawn) {
-    super(x, y, 100, "player", spawn, true);
+    super(spawn, 'player', x, y, true);
     this.dir = [];
     this.inShift = false;
     this.speed = 3.5;
@@ -14,8 +14,8 @@ class Player extends Entity {
   
     // Meta
     this.crouchSpeedMultiplier = 0.365;
-    this.lumberDamage = 20;
     this.inventory = new Inventory(20);
+    this.lumberDamage = 20;
 
     this.initEvents();
     this.scrollEvents();
@@ -99,8 +99,10 @@ class Player extends Entity {
 
       const inventoryIndex = this.currentSlot - 1;
       const item = this.inventory.slots[inventoryIndex];
+      
       if (item.id !== null && dropMap[item.id].placeable) {
-        //place item
+        
+        // Place Item
         const gameRect = $.get('#app').getBoundingClientRect();
         let x = e.clientX - gameRect.left;
         let y = e.clientY - gameRect.top;
@@ -114,6 +116,13 @@ class Player extends Entity {
         new Entity(x, y, 100, 'blob', this.spawn, true);
       }
     });
+
+    // Switch Slots on Click
+    for (let i = 1; i <= 4; i++) {
+      $.get(`hotbar-slot-${i}`).addEventListener("click", () => {
+        this.switchSlots(i)
+      });
+    }
   }
 };
 
