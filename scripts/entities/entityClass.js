@@ -1,20 +1,19 @@
 import $ from '../helper/dom.js';
 
 class Entity {
-  constructor(x=0, y=0, hp=100, classes=[], spawn, renderOnFrame=false, parent=$.get('#plane-1')) {
-    this.parent = parent;
+    constructor(spawn, classes=[], x=0, y=0, renderOnFrame=false, hp=100, parent=$.get('#plane-1')) {
     this.x = x;
     this.y = y;
     this.health = hp;
     this.spawn = spawn;
     this.entityId = `entity-${spawn.incrementEntity()}`;
 
-    this.build(classes, renderOnFrame);
+    this.build(classes, renderOnFrame, parent);
   }
 
-  build(classes, renderOnFrame) {
+  build(classes, renderOnFrame, parent) {
     this.node = $.make(classes);
-    $.append(this.node, this.parent);
+    $.append(this.node, parent);
     if (renderOnFrame) this.spawn.pushOnFrame(this.entityId, [() => this.renderPosition()]);
     else this.renderPosition();
   }
@@ -42,7 +41,6 @@ class Entity {
     this.spawn.killOnFrame(this.entityId);
     if (this.gridIndexes !== undefined) {
       this.gridIndexes.forEach(index => {
-        console.log(index);
         this.spawn.grid[index] = undefined;
       });
     }
