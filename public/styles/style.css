@@ -150,6 +150,7 @@
   border: none;
   z-index: 1 !important;
   background-color: #87cefa;
+  z-index: 1 !important;
 }
 
 .water-lily {
@@ -160,6 +161,7 @@
   border: none;
   z-index: 1 !important;
   background: url("/public/assets/environment/lily-pad.png");
+  z-index: 1 !important;
 }
 
 .water-reed {
@@ -170,6 +172,7 @@
   border: none;
   z-index: 1 !important;
   background: url("/public/assets/environment/reeds.png");
+  z-index: 1 !important;
 }
 
 .stone {

@@ -8,14 +8,17 @@
 .water-node {
   @include waterNode();
   background-color: #87cefa;
+  z-index: 1 !important;
 }
 .water-lily {
   @include waterNode();
   background: url('/public/assets/environment/lily-pad.png');
+  z-index: 1 !important;
 }
 .water-reed {
   @include waterNode();
   background: url('/public/assets/environment/reeds.png');
+  z-index: 1 !important;
 }
 
 

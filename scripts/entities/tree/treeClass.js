@@ -3,8 +3,8 @@ import random from '../../helper/randomizer.js';
 import $ from '../../helper/dom.js';
 
 class Tree extends Entity {
-  constructor(x, y, pushOnFrame, player) {
-    super(x, y, 300, 'default-tree', pushOnFrame, true);
+  constructor(x, y, pushOnFrame, killOnFrame, incrementEntity, player) {
+    super(x, y, 300, 'default-tree', pushOnFrame, killOnFrame, incrementEntity, false, $.get('#plane-1'));
     this.player = player;
     this.addShadow();
     this.node.style.zIndex = `${parseInt(this.y + 128)}`;
@@ -44,7 +44,8 @@ class Tree extends Entity {
     $.append(this.shadow, $.get('#shadow-layer'));
     $.css(this.shadow, [
       ['top', this.y + 102, 'px'],
-      ['left', this.x + 13, 'px']
+      ['left', this.x + 13, 'px'],
+      ['zIndex', 2, ' '],
     ]);
   }
 

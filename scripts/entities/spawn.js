@@ -7,28 +7,6 @@ import Stone from './environment/stoneClass.js';
 import Mushroom from './environment/mushroom.js';
 import random from '../helper/randomizer.js';
 
-// const trees = (max, min, pushOnFrame, player) => {
-//   let maxTrees = random.number(max, min);
-//   for (let i = 0; i < maxTrees; i++) {
-//     let x = random.number(1072);
-//     let y = random.number(472);
-//     new Tree(x, y, pushOnFrame, player);
-//   }
-// };
-
-// const grasses = (chance, pushOnFrame, player, xMax=1200, yMax=600, size=32) => {
-//   for (let x = 0; x < xMax; x += size) {
-//     for (let y = 0; y < yMax; y += size) {
-//       if (random.percent(chance)) {
-//         new Grass(x, y, pushOnFrame, player);
-//         if (random.percent(10)) new Mushroom(x, y-1, pushOnFrame, player);
-//       } else if (random.percent(5)) {
-//         new Grass(x, (y - 32), pushOnFrame, player, 'tall-grass');
-//       }
-//     }
-//   }
-// };
-
 // const stones = (chance, pushOnFrame, player, xMax=1200, yMax=600, size=32) => {
 //   for (let x = 0; x < xMax; x += size) {
 //     for (let y = 0; y < yMax; y += size) {
@@ -56,6 +34,7 @@ class Spawn {
     this.spawnPlayer();
     this.spawnWaterBodies();
     this.spawnGrass();
+    this.spawnTrees(25, 15);
   }
 
   getGridIndex(x, y) {
@@ -98,6 +77,18 @@ class Spawn {
         }
         else new Grass(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
       }
+    }
+  }
+
+  spawnTrees(max, min) {
+    let maxTrees = random.number(max, min);
+
+    for (let i = 0; i < maxTrees; i++) {
+      let x = random.snappedValue(1072, 32);
+      let y = random.snappedValue(472, 32);
+
+      if (this.grid[this.getGridIndex(x, (y + 96))] !== undefined) return;
+      new Tree(x, y, this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.player);
     }
   }
 };
