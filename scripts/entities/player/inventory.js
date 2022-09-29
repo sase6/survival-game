@@ -1,4 +1,5 @@
 import dropMap from '../drops/dropMap.js';
+import $ from '../../helper/dom.js';
 
 class Inventory {
   constructor(numberOfSlots) {
@@ -51,6 +52,20 @@ class Inventory {
           break;
         }
       }
+    }
+
+    this.renderHotbar();
+  }
+
+  renderHotbar() {
+    const hotbar = this.slots.slice(0, 4);
+    for (let i = 0; i < hotbar.length; i++) {
+      const slot = hotbar[i];
+      if (slot.id) {
+        $.get(`hotbar-slot-item-${i + 1}`).style.background = dropMap[slot.id].backgroundImage;
+        $.get(`hotbar-slot-item-${i + 1}`).style.backgroundSize = "cover";
+      }
+      $.get(`hotbar-slot-number-${i + 1}`).innerText = slot.amountOfItems > 0? slot.amountOfItems : "";
     }
   }
 };
