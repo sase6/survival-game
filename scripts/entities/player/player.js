@@ -29,10 +29,10 @@ class Player extends Entity {
       const notInDir = this.dir.indexOf(key) === -1;
 
       if (key === 'shift') {
-        e.preventDefault();
+        e.preventDefault(); 
         this.inShift = true;
         this.prevSpeed = this.speed;
-        this.speed = this.speed * this.crouchSpeedMultiplier;
+        this.speed = Math.ceil(this.speed * this.crouchSpeedMultiplier);
       }
       else if (isMoveKey && notInDir) this.dir.unshift(key);
       
