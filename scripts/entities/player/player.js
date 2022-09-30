@@ -19,6 +19,7 @@ class Player extends Entity {
     this.inventory = new Inventory(20);
     this.interactRange = 128;
     this.lumberDamage = 20;
+    this.stoneDamage = 15;
 
     this.initEvents();
     this.scrollEvents();

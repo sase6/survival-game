@@ -197,6 +197,14 @@
   background-size: cover;
 }
 
+.stone-chunk {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: url("/public/assets/environment/stone-chunk.png");
+  background-size: cover;
+}
+
 .stick {
   position: absolute;
   width: 32px;

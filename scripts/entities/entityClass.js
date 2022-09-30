@@ -8,6 +8,7 @@ class Entity {
     this.spawn = spawn;
     this.entityId = `entity-${spawn.incrementEntity()}`;
     this.player = this.spawn.player;
+    this.isDead = false;
 
     this.build(classes, renderOnFrame, parent);
   }
@@ -38,6 +39,7 @@ class Entity {
   }
 
   kill() {
+    this.isDead = true;
     this.node.remove();
     this.spawn.killOnFrame(this.entityId);
     if (this.gridIndexes !== undefined) {

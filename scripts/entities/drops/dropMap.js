@@ -1,5 +1,7 @@
 import random from "../../helper/randomizer.js";
 
+const defaultFallHeight = () => 32 - (random.number(16));
+
 export default {
   1: {
     id: 1,
@@ -21,7 +23,7 @@ export default {
     name: "spruce-stick",
     class: "stick",
     backgroundImage: "url(/public/assets/environment/stick.png)",
-    fallHeight: () => 32 - (random.number(16)),
+    fallHeight: defaultFallHeight,
     maxStack: 10,
     placeable: true,
     block: {
@@ -29,5 +31,15 @@ export default {
       class: "stick",
       hp: 1,
     }
+  },
+
+  3: {
+    id: 3,
+    name: "stone-chunk",
+    class: "stone-chunk",
+    backgroundImage: "url(/public/assets/environment/stone-chunk.png)",
+    fallHeight: defaultFallHeight,
+    maxStack: 10,
+    placeable: false,
   }
 };
