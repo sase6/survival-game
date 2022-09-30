@@ -7,28 +7,26 @@ class Stone extends Entity {
     super(spawn, 'stone', x, y, false);
     this.gridIndexes = [this.spawn.addToGrid(x, y, 2)];
     this.dropPercentOnHit = 10;
-
-    this.initClick();
+    
+    // Meta
+    this.takesPlayerDamage = true;
+    this.playerDamageType = "stoneDamage";
   }
 
   dropLoot() {
     new Drop(this.x, this.y, this.spawn, 3);
   }
 
-  initClick() {
-    this.node.addEventListener("click", () => {
-      if (this.isDead) return;
-      // lower hp...
-      // if below zero -> 
+  onClick(damage) {
+    if (this.isDead) return;
 
-      this.health -= this.spawn.player.stoneDamage;
-      if (this.health <= 0) {
-        this.kill();
-        this.dropLoot();
-      } else {
-        if (random.percent(this.dropPercentOnHit)) this.dropLoot();
-      }
-    });
+    this.health -= damage;
+    if (this.health <= 0) {
+      this.kill();
+      this.dropLoot();
+    } else {
+      if (random.percent(this.dropPercentOnHit)) this.dropLoot();
+    }
   }
 };
 

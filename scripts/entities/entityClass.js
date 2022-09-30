@@ -11,6 +11,7 @@ class Entity {
     this.isDead = false;
 
     this.build(classes, renderOnFrame, parent);
+    this.initClickHandler();
   }
 
   build(classes, renderOnFrame, parent) {
@@ -36,6 +37,38 @@ class Entity {
     const originX = ((selfRect.right - selfRect.left) / 2) + this.x;
     const originY = (selfRect.bottom - selfRect.top) + (yPosition || this.y) - offsetBottom;
     return [originX, originY];
+  }
+
+  animate() {
+    this.inAnimation = true;
+    this.node.style.animation = "200ms waddleBlock";
+    this.removeAnimation();
+  }
+
+  removeAnimation() {
+    setTimeout(() => {
+      if (!this.inAnimation) return;
+      this.node.style.animation = "none";
+      this.inAnimation = false;
+    }, 200);
+  }
+
+  initClickHandler() {
+    this.node.addEventListener("click", () => {
+      if (this.player.inAction) return;
+      if (this.takesPlayerDamage === true) {
+        const originX = this.x + 16;
+        const originY = this.y + 16;
+        const [playerOriginX, playerOriginY] = this.player.getOrigin(16);
+        const isNotHorizontallyClose = Math.abs(playerOriginX - originX) > this.player.interactRange;
+        const isNotVerticallyClose = Math.abs(playerOriginY - originY) > this.player.interactRange;
+        if (isNotHorizontallyClose || isNotVerticallyClose) return;
+        
+        const damage = this.player[this.playerDamageType];
+        this.animate();
+        if (this.onClick) this.onClick(damage);
+      }
+    });
   }
 
   kill() {
