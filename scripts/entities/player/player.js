@@ -12,6 +12,7 @@ class Player extends Entity {
     this.speed = 3.5;
     this.prevSpeed = this.speed;
     this.currentSlot = null;
+    this.inAction = false;
   
     // Meta
     this.crouchSpeedMultiplier = 0.365;

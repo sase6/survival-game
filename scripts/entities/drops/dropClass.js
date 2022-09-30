@@ -3,7 +3,7 @@ import $ from '../../helper/dom.js';
 import random from '../../helper/randomizer.js';
 
 class Drop {
-  constructor(x, y, spawn, dropId) {
+  constructor(x, y, spawn, dropId, dropHeight) {
     this.x = x;
     this.y = y; 
     this.spawn = spawn;
@@ -12,7 +12,7 @@ class Drop {
     this.didMove = false;
     this.dropId = dropId;
     this.drop = dropMap[dropId];
-    this.dropDestinationY = this.y + this.drop.fallHeight();
+    this.dropDestinationY = this.y + (dropHeight || this.drop.fallHeight());
     this.dropSpeed = 3;
     this.moveSpeed = 1.5;
     this.interactionRange = 128;

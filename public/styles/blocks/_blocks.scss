@@ -1,13 +1,11 @@
-// Trees
-.spruce-log-block {
-  @include defaultEntity();
-  border: none;
-  background: url('/public/assets/blocks/spruce-log-block.png');
-  background-size: cover;
-  animation: 200ms placeBlock;
+@mixin block {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  animation: 200ms waddleBlock;
 }
 
-@keyframes placeBlock {
+@keyframes waddleBlock {
   25% {
     transform: rotate(-10deg);
   }
@@ -15,4 +13,11 @@
   75% {
     transform: rotate(10deg);
   }
+}
+
+// Trees
+.spruce-log-block {
+  @include block();
+  background: url('/public/assets/blocks/spruce-log-block.png');
+  background-size: cover;
 }
