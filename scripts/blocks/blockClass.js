@@ -10,7 +10,7 @@ class Block extends Entity {
     this.itemId = itemId;
     this.inAnimation = true;
     this.player = spawn.player;
-    this.hp = 80;
+    this.hp = item.block.hp;
 
     this.removeAnimation();
     this.clickEvent();
