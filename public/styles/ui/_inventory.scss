@@ -1,5 +1,14 @@
 $slot-width: 48px;
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .hotbar {
   position: absolute;
   width: 240px;
@@ -38,4 +47,126 @@ $slot-width: 48px;
 
 .drop {
   z-index: 99998 !important;
+}
+
+.inventory-ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0, 0.485);
+  backdrop-filter: blur(2px);
+  z-index: 99997 !important;
+  animation: 500ms fadeIn forwards;
+  display: grid;
+  place-items: center;
+  color: white !important;
+}
+
+.inventory-ui-container {
+  width: max-content;
+  height: max-content;
+  display: grid;
+  grid-template-columns: 100px 200px 50px;
+  grid-column-gap: 50px;
+}
+
+.craft-category-selector {
+  display: grid;
+  grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+}
+
+.inventory-ui-main {
+  display: grid;
+  grid-template-rows: 50px 150px 50px 200px;
+  grid-row-gap: 12.5px;
+}
+
+.craftable-display {
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px;
+  grid-template-rows: 50px 50px 50px;
+}
+
+.inventory-ui-header {
+  display: grid;
+  grid-template-columns: max-content 100px;
+  justify-content: space-between;
+}
+
+.extra-inventory-space {
+  display: grid;
+  grid-template-columns: 50px 50px;
+  grid-template-rows: 50px;;
+}
+
+.main-inventory-slots {
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px;
+  grid-template-rows: 50px 50px 50px 50px;
+}
+
+.gear-container {
+  display: grid;
+  grid-template-rows: 288px 100px;
+}
+
+.empty-gear-x {
+  height: 300px;
+  width: 50px;
+}
+
+.gear-inventory-set {
+  display: grid;
+  grid-template-rows: 50px 50px 50px 50px;
+  grid-template-columns: 50px;
+}
+
+.inventory-category {
+  width: 100%;
+  height: 35px;
+  border: 2px solid silver;
+  color: whitesmoke;
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+}
+
+.inventory-category:hover {
+  background-color: indianred;
+  cursor: pointer;
+}
+
+.craft-search {
+  position: relative;
+  width: 200px !important;
+  height: 35px !important;
+  top: 15px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(0,0,0, 0.85);
+  text-transform: capitalize;
+  background-color: rgba(255,255,255,0.385);
+}
+.craft-search:active {
+  outline: none;
+}
+.craft-search:focus {
+  outline: none;
+}
+
+.inventory-ui-header {
+  display: grid;
+  align-items: center;
+}
+
+.ui-header-text {
+  font-weight: 900;
+  font-size: 17px;
 }
