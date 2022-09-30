@@ -59,7 +59,6 @@
   position: absolute;
   width: 32px;
   height: 32px;
-  border: 1px solid black;
   border: none;
   background: url("/public/assets/shadows/pine-tree-shadow.png");
   background-size: cover;
@@ -129,46 +128,41 @@
     transform: translateY(128px);
   }
 }
-.grass {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  border: 1px solid black;
-  border: none;
-  background: url("/public/assets/environment/grass.png");
-  background-size: cover;
-}
-
-.tall-grass {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  border: 1px solid black;
-  border: none;
-  background: url("/public/assets/environment/grass.png");
-  background-size: cover;
-  height: 64px;
-  background: url("/public/assets/environment/tall-grass.png");
-}
-
 .deer {
   position: absolute;
   width: 32px;
   height: 32px;
-  border: 1px solid black;
   height: 64px;
   width: 64px;
-  background: url("/public/assets/animals/Deer.png");
+  background: url("/public/assets/animals/deer.png");
   background-size: cover;
   border: none;
   transform-origin: bottom center;
+}
+
+.grass {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: url("/public/assets/environment/grass.png");
+  background-size: cover;
+  z-index: 1 !important;
+}
+
+.grass-variant-1 {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: url("/public/assets/environment/grass.png");
+  background-size: cover;
+  z-index: 1 !important;
+  background: url("/public/assets/environment/grass-1.png") cover;
 }
 
 .water-node {
   position: absolute;
   width: 32px;
   height: 32px;
-  border: 1px solid black;
   border: none;
   z-index: 1 !important;
   background-color: #09C3DB;
@@ -179,7 +173,6 @@
   position: absolute;
   width: 32px;
   height: 32px;
-  border: 1px solid black;
   border: none;
   z-index: 1 !important;
   background: url("/public/assets/environment/lily-pad.png");
@@ -190,7 +183,6 @@
   position: absolute;
   width: 32px;
   height: 32px;
-  border: 1px solid black;
   border: none;
   z-index: 1 !important;
   background: url("/public/assets/environment/reeds.png");
@@ -201,19 +193,7 @@
   position: absolute;
   width: 32px;
   height: 32px;
-  border: 1px solid black;
-  border: none;
   background: url("/public/assets/environment/stone.png");
-  background-size: cover;
-}
-
-.purple-mushroom {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  border: 1px solid black;
-  border: none;
-  background: url("/public/assets/environment/purple-mushroom.png");
   background-size: cover;
 }
 
@@ -221,8 +201,6 @@
   position: absolute;
   width: 32px;
   height: 32px;
-  border: 1px solid black;
-  border: none;
   background: url("/public/assets/environment/stick.png");
   background-size: cover;
 }
@@ -270,7 +248,7 @@
   top: calc(50vh - 304px);
   left: calc(50vw - 608px);
   border: 1px solid black;
-  background: #348C31;
+  background: #4B8673;
   overflow: hidden;
 }
 

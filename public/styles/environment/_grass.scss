@@ -1,0 +1,8 @@
+.grass {
+  @include grass();
+}
+
+.grass-variant-1 {
+  @include grass();
+  background: url('/public/assets/environment/grass-1.png') cover;
+}

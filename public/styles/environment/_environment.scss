@@ -1,10 +1,21 @@
-
-// Water Nodes
 @mixin waterNode {
   @include defaultEntity();
   border: none;
   z-index: 1 !important;
 }
+
+@mixin grass {
+  @include defaultEntity();
+  background: url('/public/assets/environment/grass.png');
+  background-size: cover;
+  z-index: 1 !important;
+}
+
+
+// Imports
+@import './grass';
+
+// Water Nodes
 .water-node {
   @include waterNode();
   background-color: $water;
@@ -25,22 +36,12 @@
 // Stones
 .stone {
   @include defaultEntity();
-  border: none;
   background: url('/public/assets/environment/stone.png');
-  background-size: cover;
-}
-
-// Vegetation
-.purple-mushroom {
-  @include defaultEntity();
-  border: none;
-  background: url('/public/assets/environment/purple-mushroom.png');
   background-size: cover;
 }
 
 .stick {
   @include defaultEntity();
-  border: none;
   background: url('/public/assets/environment/stick.png');
   background-size: cover;
 }

@@ -4,33 +4,29 @@
 $gameWidth: 1216px;
 $gameHeight: 608px;
 $blackBorder: 1px solid black;
-$grass: #348C31;
+$forestGreen: #4B8673;
 $water: #09C3DB;
 
 @mixin defaultEntity {
   position: absolute;
   width: 32px;
   height: 32px;
-  border: $blackBorder;
 }
 
 // Imports
 @import './ui/inventory';
 @import './entities/player.scss';
 @import './entities/tree';
-@import './entities/grass';
 @import './entities/animals';
-@import './_environment.scss'; 
+@import './environment/environment';
 @import './blocks/blocks';
 
 // Styles
 * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif; //Roboto Later
+  font-family: sans-serif;
   image-rendering: pixelated !important;
-  // image-rendering: -moz-crisp-edges !important;
-  // image-rendering: crisp-edges !important;
 }
 
 #app {
@@ -40,9 +36,8 @@ $water: #09C3DB;
   top: calc(50vh - 304px);
   left: calc(50vw - 608px);
   border: $blackBorder;
-  // background: olivedrab; 
-  background: $grass;
-  overflow: hidden;
+  background: $forestGreen;
+  overflow: hidden; 
 }
 
 .layer {

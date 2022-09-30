@@ -4,7 +4,6 @@ import Grass from './environment/grassClass.js';
 import Deer from './animals/deer.js';
 import WaterBody from './environment/waterBodyClass.js';
 import Stone from './environment/stoneClass.js';
-import Mushroom from './environment/mushroom.js';
 import Stick from './environment/stickClass.js';
 import random from '../helper/randomizer.js';
 
@@ -69,11 +68,7 @@ class Spawn {
         if (this.grid[this.getGridIndex(x, y)] !== undefined) continue;
         if (random.percent(80)) continue;
 
-        if (random.percent(15)) new Grass(x, (y - 32), this, 'tall-grass');
-        else if (random.percent(5)) {
-          new Mushroom(x, y, this);
-          new Grass(x, y, this);
-        }
+        if (random.percent(15)) new Grass(x, (y - 32), this, 'grass-variant-1');
         else new Grass(x, y, this);
       }
     }
