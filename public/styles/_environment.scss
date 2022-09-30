@@ -37,3 +37,10 @@
   background: url('/public/assets/environment/purple-mushroom.png');
   background-size: cover;
 }
+
+.stick {
+  @include defaultEntity();
+  border: none;
+  background: url('/public/assets/environment/stick.png');
+  background-size: cover;
+}

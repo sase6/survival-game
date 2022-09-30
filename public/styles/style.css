@@ -217,6 +217,16 @@
   background-size: cover;
 }
 
+.stick {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  border: none;
+  background: url("/public/assets/environment/stick.png");
+  background-size: cover;
+}
+
 @-webkit-keyframes waddleBlock {
   25% {
     transform: rotate(-10deg);

@@ -5,6 +5,7 @@ import Deer from './animals/deer.js';
 import WaterBody from './environment/waterBodyClass.js';
 import Stone from './environment/stoneClass.js';
 import Mushroom from './environment/mushroom.js';
+import Stick from './environment/stickClass.js';
 import random from '../helper/randomizer.js';
 
 class Spawn {
@@ -18,6 +19,7 @@ class Spawn {
     this.spawnPlayer();
     this.spawnWaterBodies();
     this.spawnStone();
+    this.spawnSticks();
     this.spawnGrass();
     this.spawnTrees(35, 20);
     this.spawnDeers();
@@ -95,6 +97,15 @@ class Spawn {
         if (random.percent(chance) && this.grid[this.getGridIndex(x, y + 96)] === undefined) {
           new Deer(x, (y + 64), this);
         }
+      }
+    }
+  }
+
+  spawnSticks(xMax=1184, yMax=772) {
+    for (let x = 1; x < xMax; x += 32) {
+      for (let y = 1; y < yMax; y += 32) {
+        if (this.grid[this.getGridIndex(x, y)] !== undefined || random.percent(99)) continue;
+        new Stick(x, y, this);
       }
     }
   }
