@@ -1,29 +1,28 @@
-import Player from "./entities/player/player.js";
-import Spawn from './entities/spawn.js';
+import Spawn from './spawn.js';
+const tileArea = 722;
 
 class World {
   constructor() {
-    // Global Variables
     this.perFrame = {};
     this.entityCount = 0;
-    this.grid = new Array((19 * 38)); //Pixel Area of Game /32
+    this.grid = new Array(tileArea);
 
-    // Functions
     this.incrementEntity = () => {
-      this.entityCount++;
-      return this.entityCount - 1;
+      const postIncrement = this.entityCount;
+      this.entityCount += 1;
+      return postIncrement;
     }
 
     this.killOnFrame = (id) => delete this.perFrame[id];
 
     this.pushOnFrame = (id, funcs) => {
       let arrOfFuncs = Array.isArray(funcs)? funcs : [funcs];
-      if (this.perFrame[id] !== undefined) this.perFrame[id] = [...this.perFrame[id], ...arrOfFuncs];
+      const existingFunctions = this.perFrame[id];
+      if (existingFunctions !== undefined) this.perFrame[id] = [...existingFunctions, ...arrOfFuncs];
       else this.perFrame[id] = arrOfFuncs;
     };
 
-    // Start
-    new Spawn(this.pushOnFrame, this.killOnFrame, this.incrementEntity, this.grid);
+    new Spawn(this);
     this.loop();
   }
 
