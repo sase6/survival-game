@@ -15,7 +15,7 @@ $water: #09C3DB;
 
 // Imports
 @import './ui/inventory';
-@import './entities/player.scss';
+@import "./entities/player";
 @import './entities/tree';
 @import './entities/animals';
 @import './environment/environment';
