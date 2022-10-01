@@ -1,12 +1,12 @@
-import Block from '../../blocks/blockClass.js';
-import Entity from '../entityClass.js';
-import Inventory from './inventory.js';
-import dropMap from '../drops/dropMap.js';
-import $ from '../../helper/dom.js';
+import Block from "../blocks/block.js";
+import Entity from "../entity/entity.js";
+import Inventory from "./inventory.js";
+import itemMap from "../data/itemMap.js";
+import $ from "../helper/dom.js";
 
 class Player extends Entity {
   constructor(x, y, spawn) {
-    super(spawn, 'player', x, y, true);
+    super(spawn, "player", x, y, true);
     this.dir = [];
     this.inShift = false;
     this.speed = 3.5;
@@ -104,7 +104,7 @@ class Player extends Entity {
       const inventoryIndex = this.currentSlot - 1;
       const item = this.inventory.slots[inventoryIndex];
       
-      if (item.id !== null && dropMap[item.id].placeable) {
+      if (item.id !== null && itemMap[item.id].isPlaceable) {
         
         // Place Item
         const gameRect = $.get('#app').getBoundingClientRect();
@@ -121,10 +121,10 @@ class Player extends Entity {
 
         if (notIXRange || notInYRange) return;
 
-        const gridIndex = this.spawn.getGridIndex(x, y);
-        const gridBlock = this.spawn.grid[gridIndex];
+        // const gridIndex = this.spawn.getGridIndex(x, y);
+        // const gridBlock = this.spawn.grid[gridIndex];
 
-        if (gridBlock !== undefined) return;
+        if (this.spawn.checkGrid(x, y) !== undefined) return;
 
         new Block(this.spawn, x, y, item.id);
         this.inventory.removeFromInventory(this.currentSlot - 1);

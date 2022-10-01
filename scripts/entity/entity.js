@@ -1,6 +1,6 @@
 import $ from '../helper/dom.js';
 const defaultHp = 100;
-const defaultParent = $.get("#ui-plane");
+const defaultParent = $.get("#plane-1");
 
 class Entity {
   constructor(spawn, classes, x=0, y=0, renderEveryFrame=false, hp=defaultHp, parent=defaultParent) {
@@ -20,7 +20,7 @@ class Entity {
     this.node = $.make(classes);
     $.append(this.node, parent);
     
-    if (renderEveryFrame) this.spawn.pushOnFrame(() => this.renderPosition());
+    if (renderEveryFrame) this.spawn.pushOnFrame(this.entityId, () => this.renderPosition());
     else this.renderPosition();
   }
 
@@ -28,7 +28,7 @@ class Entity {
     $.css(this.node, [
       ["top", this.y, "px"],
       ["left", this.x, "px"],
-      ["zIndex", this.getOrigin(0)[1], "px"],
+      ["zIndex", parseInt(this.getOrigin(0)[1])],
     ]);
   }
 
@@ -40,13 +40,17 @@ class Entity {
   }
 
   initClickListener() {
-    if (!this.onClick) return;
-    const [originX, originY] = this.getOrigin();
-    const [playerOriginX, playerOriginY] = this.player.getOrigin();
-    const isHorizontallyClose = Math.abs(originX - playerOriginX) < this.player.interactRange;
-    const isVerticallyClose = Math.abs(originY - playerOriginY) < this.player.interactRange;
-    if (!isHorizontallyClose || !isVerticallyClose) return;
-    this.onClick(true); // If player is close or not
+    this.node.addEventListener("click", () => {
+      if (!this.onClick) return;
+      const [originX, originY] = this.getOrigin();
+      const [playerOriginX, playerOriginY] = this.player.getOrigin();
+      const xDistance = Math.abs(originX - playerOriginX);
+      const yDistance = Math.abs(originY - playerOriginY);
+      const isHorizontallyClose = xDistance < this.player.interactRange;
+      const isVerticallyClose = yDistance < this.player.interactRange;
+      if (!isHorizontallyClose || !isVerticallyClose) return;
+      this.onClick(true, xDistance, yDistance); // If player is close or not
+    });
   }
 
   animate(name, duration, extension="") {

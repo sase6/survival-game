@@ -43,7 +43,7 @@
 .stone-chunk {
   @include defaultEntity();
   background: url('/public/assets/environment/stone-chunk.png');
-  background-size: cover
+  background-size: cover;
 }
 
 .stick {

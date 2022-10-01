@@ -1,6 +1,6 @@
-import Entity from "../entityClass.js";
-import random from '../../helper/randomizer.js';
-import $ from '../../helper/dom.js';
+import Entity from "../entity/entity.js";
+import random from "../helper/randomizer.js";
+import $ from "../helper/dom.js";
 
 class Deer extends Entity {
   constructor(x, y, spawn) {

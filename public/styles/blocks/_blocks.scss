@@ -19,6 +19,7 @@
 // Trees
 .spruce-log-block {
   @include block();
-  background: url('/public/assets/blocks/spruce-log-block.png');
+  height: 64px;
+  background: url('/public/assets/blocks/spruce-wall.png');
   background-size: cover;
 }

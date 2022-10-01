@@ -1,9 +1,10 @@
 import Entity from '../entity/entity.js';
 import random from '../helper/randomizer.js';
+import $ from "../helper/dom.js";
 
 class WaterBody extends Entity {
   constructor(x, y, spawn) {
-    super(spawn, "water-bodies", x, y, false);
+    super(spawn, "water-bodies", x, y, false, 100, $.get("#before-all-layer"));
 
     // Meta
     this.xNumOfTiles = random.number(15, 3);
@@ -72,7 +73,7 @@ class WaterBody extends Entity {
 
 class WaterNode extends Entity {
   constructor(x, y, spawn, type="water-node") {
-    super(spawn, type, x, y);
+    super(spawn, type, x, y, false, 1, $.get("#before-all-layer"));
   }
 };
 

@@ -1,5 +1,5 @@
-import dropMap from '../drops/dropMap.js';
-import $ from '../../helper/dom.js';
+import itemMap from "../data/itemMap.js";
+import $ from "../helper/dom.js";
 
 class Inventory {
   constructor(numberOfSlots) {
@@ -7,11 +7,14 @@ class Inventory {
     this.numberOfSlots = numberOfSlots;
     this.uiOpen = false;
 
-    for (let i = 0; i < numberOfSlots; i++) {
+    this.populateSlots();
+    this.toggleInventoryUI();
+  }
+
+  populateSlots() {
+    for (let i = 0; i < this.numberOfSlots; i++) {
       this.slots.push(this.newSlot());
     }
-
-    this.initEvents();
   }
 
   newSlot() {
@@ -22,7 +25,7 @@ class Inventory {
     };
   }
 
-  initEvents() {
+  toggleInventoryUI () {
     document.addEventListener("keydown", (e) => {
       if (e.key.toLowerCase() === 'e' && this.uiOpen === false) {
         this.uiOpen = true;
@@ -34,16 +37,11 @@ class Inventory {
     });
   }
 
-  addToSlot(id, slotNumber, amt=1) {
-    // if (slotNumber) {
-    //   // Later
-    //   return;
-    // }
-
+  addToSlot(itemId, slotNumber, amt=1) {
     for (let i = 0; i < this.slots.length; i++) {
       const slot = this.slots[i];
 
-      if (slot.id === id && slot.amountOfItems < slot.maxStacks) {
+      if (slot.id === itemId && slot.amountOfItems < slot.maxStacks) {
         const maxToAdd = slot.maxStacks - slot.amountOfItems;
         if (amt > maxToAdd) {
           slot.amountOfItems += maxToAdd;
@@ -55,8 +53,8 @@ class Inventory {
         }
 
       } else if (slot.id === null) {
-        slot.id = id;
-        slot.maxStacks = dropMap[id].maxStack;
+        slot.id = itemId;
+        slot.maxStacks = itemMap[itemId].maxStacks;
 
         if (amt > slot.maxStacks) {
           slot.amountOfItems = slot.maxStacks;
@@ -86,7 +84,7 @@ class Inventory {
     for (let i = 0; i < hotbar.length; i++) {
       const slot = hotbar[i];
       if (slot.id) {
-        $.get(`hotbar-slot-item-${i + 1}`).style.background = dropMap[slot.id].backgroundImage;
+        $.get(`hotbar-slot-item-${i + 1}`).style.background = itemMap[slot.id].background;
         $.get(`hotbar-slot-item-${i + 1}`).style.backgroundSize = "cover";
       } else $.get(`hotbar-slot-item-${i + 1}`).style.background = "transparent";
       $.get(`hotbar-slot-number-${i + 1}`).innerText = slot.amountOfItems > 0? slot.amountOfItems : "";

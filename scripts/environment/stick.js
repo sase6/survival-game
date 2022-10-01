@@ -1,21 +1,18 @@
-import Entity from '../entityClass.js';
-import Drop from '../drops/dropClass.js';
+import Entity from "../entity/entity.js";
+import Item from "../entity/item.js";
 
 class Stick extends Entity {
   constructor(x, y, spawn) {
     super(spawn, 'stick', x, y, false);
     this.gridIndexes = [spawn.addToGrid(x, y, 2)];
-
-    // Meta
-    this.takesPlayerDamage = true;
-    this.playerDamageType = "lumberDamage";
   }
 
   dropLoot() {
-    new Drop(this.x, this.y, this.spawn, 2);
+    new Item(this.x, this.y, this.spawn, 1);
   }
 
-  onClick() {
+  onClick(playerIsClose) {
+    if (!playerIsClose) return;
     this.dropLoot();
     this.kill();
   }

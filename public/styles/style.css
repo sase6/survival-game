@@ -18,9 +18,6 @@
   position: absolute;
   width: 240px;
   height: 48px;
-  z-index: 99999 !important;
-  top: calc(100% - 56px);
-  left: calc(50% - 120px);
   display: grid;
   grid-template-columns: 48px 48px 48px 48px 48px;
 }
@@ -256,11 +253,11 @@
     opacity: 0;
   }
 }
-.spruce-log-drop {
+.spruce-log {
   position: absolute;
   width: 16px;
   height: 16px;
-  background: url("/public/assets/tree/spruce-log-drop.png");
+  background: url("/public/assets/tree/spruce-log.png");
   background-size: cover;
 }
 
@@ -384,7 +381,8 @@
   transform-origin: bottom center;
   -webkit-animation: 200ms waddleBlock;
           animation: 200ms waddleBlock;
-  background: url("/public/assets/blocks/spruce-log-block.png");
+  height: 64px;
+  background: url("/public/assets/blocks/spruce-wall.png");
   background-size: cover;
 }
 
@@ -395,6 +393,7 @@
   -ms-interpolation-mode: nearest-neighbor !important;
       image-rendering: -moz-crisp-edges !important;
       image-rendering: pixelated !important;
+  box-sizing: border-box !important;
 }
 
 #app {
@@ -409,6 +408,7 @@
 }
 
 .layer {
+  position: absolute;
   width: 100%;
   height: 100%;
 }
@@ -426,12 +426,13 @@
 }
 
 #ui-plane {
-  z-index: 4 !important;
-}
-
-.blob {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  background: black;
+  width: 240px;
+  height: 48px;
+  z-index: 99999 !important;
+  top: calc(100% - 56px);
+  left: calc(50% - 120px);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  z-index: 3 !important;
 }/*# sourceMappingURL=style.css.map */
