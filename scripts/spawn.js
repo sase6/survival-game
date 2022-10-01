@@ -38,7 +38,18 @@ class Spawn {
     }
   }
 
-  //
+  spawnByCount(chance=100, maxAmount, entity, xGridModifier=0, yGridModifier=0, minAmount=1, xMax=700, yMax=500) {
+      for (let i = 0; i < (random.number(maxAmount, minAmount)); i++) {
+      const x = random.snappedValue(xMax);
+      const y = random.snappedValue(yMax);
+      if (random.percent(100 - chance) || this.checkGrid(x + xGridModifier, y + yGridModifier)) continue;
+      new entity(x, y, this);
+    }
+  }
 };
 
 export default Spawn;
+
+// Grid Codes 
+// 1. Unspawnable
+// 2. Unspawnable && Unwalkable
