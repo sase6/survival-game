@@ -48,5 +48,22 @@ export default {
       class: "spruce-log",
       dropHeight: defaultDropHeight
     }
+  },
+
+  4: {
+    name: "Stone Axe",
+    class: "stone-axe",
+    background: "url(/public/assets/tools/stone-axe.png)",
+    maxStacks: 1,
+    isPlaceable: false,
+    isConsumable: false,
+    isCraftable: true,
+    craftingRecipe: {
+      1: 2, // Stick
+      2: 2  // Stone Chunk
+    },
+    effects: {
+      lumberDamage: 100
+    }
   }
 };

@@ -112,6 +112,7 @@ class Inventory {
     const craftingContainer = $.appendNew("crafting-container", craftAndInventoryContainer);
     [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18].map((num) => {
       const craftableSlot = $.appendNew(["craft-slot", `craft-slot-${num}`], craftingContainer);
+      const craftSlotItem = $.appendNew(["hotbar-slot-item", `craft-slot-item-${num}`], craftableSlot);
     });
 
     const inventoryAndGearHeader = $.appendNew("inventory-and-gear-header", craftAndInventoryContainer);
@@ -139,6 +140,7 @@ class Inventory {
 
     // Render
     this.renderInventory();
+    this.renderCraftableItems();
   }
 
   renderInventory() {
@@ -152,7 +154,46 @@ class Inventory {
       } else $.get(`hotbar-slot-item-${inventoryNumber}`).style.background = "transparent";
         $.get(`hotbar-slot-number-${inventoryNumber}`).innerText = slot.amountOfItems > 0? slot.amountOfItems : "";
       }
+  }
+
+  renderCraftableItems() {
+    const craftableItems = [];
+
+    for (let itemId in itemMap) {
+      const item = itemMap[itemId];
+      if (!item.isCraftable) continue;
+      let hasAllIngredients = true;
+
+      const ingredients = item.craftingRecipe;
+      let ingredientsFound = {};
+
+      for (let id in ingredients) {
+        ingredientsFound[id] = 0;
+
+        for (let i = 0; i < this.slots.length; i++) {
+          const slot = this.slots[i];
+          id = parseInt(id);
+          if (slot.id === id) ingredientsFound[id] += slot.amountOfItems;
+        }
+      }
+
+      // Match Quantites
+      for (let ingredient in ingredients) {
+        if (ingredients[ingredient] > ingredientsFound[ingredient]) {
+          hasAllIngredients = false;
+          break;
+        }
+      }
+
+      if (hasAllIngredients) craftableItems.push(itemId);
     }
+
+    craftableItems.map((itemId, index) => {
+      const item = itemMap[itemId];
+      $.get(`craft-slot-item-${index + 1}`).style.background = item.background;
+      $.get(`craft-slot-item-${index + 1}`).style.backgroundSize = "cover";
+    });
+  }
 };
 
 export default Inventory;
