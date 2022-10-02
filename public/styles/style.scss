@@ -22,6 +22,9 @@ $water: #09C3DB;
 @import './blocks/blocks';
 
 // Styles
+body {
+  background: #121212;
+}
 * {
   margin: 0;
   padding: 0;

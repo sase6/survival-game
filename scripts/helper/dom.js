@@ -24,6 +24,12 @@ const make = (classes=[], type='div', id=null) => {
   return node;
 };
 
+const appendNew = (className, parent, type="div") => {
+  const el = make(className, type);
+  append(el, parent);
+  return el;
+};
+
 const css = (element, cssPropArr) => {
   cssPropArr.forEach(propArr => {
     const prop = propArr[0];
@@ -40,5 +46,5 @@ const css = (element, cssPropArr) => {
 };
 
 export default {
-  get, make, append, css
+  get, make, append, css, appendNew
 };

@@ -40,7 +40,7 @@ class Player extends Entity {
         this.prevSpeed = this.speed;
         this.speed = Math.ceil(this.speed * this.crouchSpeedMultiplier);
       }
-      else if (isMoveKey && notInDir) this.dir.unshift(key);
+      else if (isMoveKey && notInDir && !this.inventory.uiOpen) this.dir.unshift(key);
       else if (!isNaN(keyInNum) && keyInNum < 5 && keyInNum > 0) this.switchSlots(keyInNum);
     });
 

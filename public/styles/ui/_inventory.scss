@@ -17,25 +17,42 @@ $slot-width: 48px;
   grid-template-columns: $slot-width $slot-width $slot-width $slot-width $slot-width;
 }
 
-.hotbar-slot {
+@mixin slot {
   position: relative;
-  background: url('/public/assets/ui/inventory-slot.png');
-  background-size: cover;
   opacity: 0.85;
   border: 1px solid transparent;
   display: grid;
   place-items: center;
+}
+
+.hotbar-slot {
+  @include slot();
+  background: url('/public/assets/ui/inventory-slot.png');
+  background-size: cover;
 } 
+
+.craft-slot {
+  @include slot();
+  background: url('/public/assets/ui/craft-slot.png');
+  background-size: cover;
+}
+
+.craft-button {
+  background-color: skyblue;
+  grid-column: span 3;
+  background: url("/public/assets/ui/craft-button.png");
+  background-size: cover;
+  width: 135px;
+  height: 45px;
+  position: absolute;
+  bottom: 3px;
+  right: 2px;
+}
 
 .hotbar-slot-item {
   position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.hotbar-slot-number {
-  position: absolute;
-  top: 8px;
+  width: 24px;  background: url('/public/assets/ui/inventory-slot.png');
+  background-size: cover;  top: 8px;
   right: 10px;
   color: white;
   font-weight: 900;
@@ -46,124 +63,91 @@ $slot-width: 48px;
   z-index: 99998 !important;
 }
 
-.inventory-ui {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0, 0.485);
+.inventory-overlay {
+  position: fixed;
+  width: 1216px;
+  height: 608px;
+  top: calc(50vh - 304px);
+  left: calc(50vw - 608px);
+  background: rgba(0,0,0,0.435);
   backdrop-filter: blur(2px);
-  z-index: 99997 !important;
   animation: 500ms fadeIn forwards;
-  display: grid;
-  place-items: center;
-  color: white !important;
 }
 
-.inventory-ui-container {
-  width: max-content;
-  height: max-content;
+.inventory-container {
+  position: relative;
+  width: 375px;
+  height: 450px;
   display: grid;
-  grid-template-columns: 100px 200px 50px;
+  grid-template-columns: 275px 50px;
   grid-column-gap: 50px;
+  top: calc(304px - 225px);
+  left: calc(608px - 188px);
 }
 
-.craft-category-selector {
-  display: grid;
-  grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
-}
-
-.inventory-ui-main {
+.craft-and-inventory-container {
+  position: relative;
   display: grid;
   grid-template-rows: 50px 150px 50px 200px;
-  grid-row-gap: 12.5px;
 }
 
-.craftable-display {
-  display: grid;
-  grid-template-columns: 50px 50px 50px 50px;
-  grid-template-rows: 50px 50px 50px;
+.crafting-search {
+  position: relative;
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  height: 35px;
+  width: 290px;
+  left: 5px;
 }
+.crafting-search:focus, .crafting-search:active {outline: none;}
 
-.inventory-ui-header {
+$slotSize: 50px;
+.crafting-container {
+  position: relative;
   display: grid;
-  grid-template-columns: max-content 100px;
+  grid-template-columns: $slotSize $slotSize $slotSize $slotSize $slotSize $slotSize;
+  grid-template-rows: $slotSize $slotSize $slotSize;
   justify-content: space-between;
 }
 
-.extra-inventory-space {
+.inventory-and-gear-slots {
   display: grid;
-  grid-template-columns: 50px 50px;
-  grid-template-rows: 50px;;
+  grid-template-columns: 200px 50px;
+  grid-column-gap: 50px;
 }
 
-.main-inventory-slots {
+.inventory-slots {
   display: grid;
-  grid-template-columns: 50px 50px 50px 50px;
-  grid-template-rows: 50px 50px 50px 50px;
+  grid-template-columns: $slotSize $slotSize $slotSize $slotSize;
+  grid-template-rows: $slotSize $slotSize $slotSize $slotSize;
 }
 
-.gear-container {
+.gear-slots {
   display: grid;
-  grid-template-rows: 288px 100px;
+  grid-template-rows: $slotSize $slotSize $slotSize $slotSize;
 }
 
-.empty-gear-x {
-  height: 300px;
+.category-and-inventory-addon {
   width: 50px;
-}
-
-.gear-inventory-set {
   display: grid;
-  grid-template-rows: 50px 50px 50px 50px;
-  grid-template-columns: 50px;
+  grid-template-rows: 200px 200px;
+  grid-row-gap: 50px;
 }
 
-.inventory-category {
-  width: 100%;
-  height: 35px;
-  border: 2px solid silver;
-  color: whitesmoke;
-  border-radius: 5px;
-  box-sizing: border-box;
+.inventory-addons, .craft-categories {
   display: grid;
-  place-items: center;
-  font-weight: 900;
+  grid-template-rows: $slotSize $slotSize $slotSize $slotSize;
 }
 
-.inventory-category:hover {
-  background-color: indianred;
-  cursor: pointer;
+.craft-categories {
+  align-content: space-between;
 }
 
-.craft-search {
+.inventory-and-gear-header {
   position: relative;
-  width: 200px !important;
-  height: 35px !important;
-  top: 15px;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 600;
-  color: rgba(0,0,0, 0.85);
-  text-transform: capitalize;
-  background-color: rgba(255,255,255,0.385);
-}
-.craft-search:active {
-  outline: none;
-}
-.craft-search:focus {
-  outline: none;
-}
-
-.inventory-ui-header {
-  display: grid;
-  align-items: center;
-}
-
-.ui-header-text {
   font-weight: 900;
-  font-size: 17px;
+  color: white;
+  top: 28px;
+  left: 8px;
 }

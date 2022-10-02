@@ -66,6 +66,9 @@ class Deer extends Entity {
       }
     }
 
+    // Animations
+    // Future
+
     this.faceDirection();
     $.css(this.node, [
       ['top', this.y, 'px'],

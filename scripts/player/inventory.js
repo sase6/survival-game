@@ -27,12 +27,15 @@ class Inventory {
 
   toggleInventoryUI () {
     document.addEventListener("keydown", (e) => {
-      if (e.key.toLowerCase() === 'e' && this.uiOpen === false) {
-        this.uiOpen = true;
+      if (e.key === 'Escape' && this.uiOpen) {
+        this.closeUI();
+        return;
+      }
+
+      if (e.key.toLowerCase() === 'i' && this.uiOpen === false) {
         this.buildUI();
-      } else if (e.key.toLowerCase() === 'e' && this.uiOpen === true) {
-        this.uiOpen = false;
-        this.inventoryUI.remove();
+      } else if (e.key.toLowerCase() === 'i' && this.uiOpen === true) {
+        this.closeUI();
       }
     });
   }
@@ -91,72 +94,47 @@ class Inventory {
     }
   }
 
+  closeUI() {
+    this.inventoryOverlay.remove();
+    this.uiOpen = false;
+  }
+
   buildUI() {
-    this.inventoryUI = $.make("inventory-ui");
-    $.append(this.inventoryUI, $.get("#app"));
+    this.uiOpen = true;
+    this.inventoryOverlay = $.appendNew("inventory-overlay", $.get("#ui-plane"));
+    const inventoryContainer = $.appendNew("inventory-container", this.inventoryOverlay);
 
-    // Container
-    this.inventoryUIContainer = $.make('inventory-ui-container');
-    $.append(this.inventoryUIContainer, this.inventoryUI);
+    // Craft and Inventory Slots 
+    const craftAndInventoryContainer = $.appendNew("craft-and-inventory-container", inventoryContainer);
+    const craftingSearch = $.appendNew("crafting-search", craftAndInventoryContainer, "input");
+    setTimeout(() => craftingSearch.focus(), 50);
 
-    // Crafting Category
-    this.craftCategories = $.make("craft-category-selector");
-    $.append(this.craftCategories, this.inventoryUIContainer);
-    $.append($.make(), this.craftCategories);
-    ["Tools", "Blocks", 3, 4, 5, 6, 7, 8, 9].forEach(category => {
-      const categoryElement = $.make("inventory-category");
-      categoryElement.style.border = "1px solid silver";
-      $.append(categoryElement, this.craftCategories);
-      categoryElement.innerText = category;
+      // Craftable Items Slots
+    const craftingContainer = $.appendNew("crafting-container", craftAndInventoryContainer);
+    [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18].map((num) => {
+      const craftableSlot = $.appendNew(["craft-slot", `craft-slot-${num}`], craftingContainer);
     });
 
-    // Main inventory-ui-main
-    this.mainInventorySection = $.make("inventory-ui-main");
-    $.append(this.mainInventorySection, this.inventoryUIContainer);
-      // Search
-    this.searchElement = $.make("craft-search", "input");
-    $.append(this.searchElement, this.mainInventorySection);
-      // Craftable Items .craftable-display
-    this.craftableItems = $.make("craftable-display");
-    $.append(this.craftableItems, this.mainInventorySection);
-    [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].forEach((index) => {
-      const craftSlot = $.make(["hotbar-slot", `craft-slot-${index + 1}`]);
-      craftSlot.style.border = "1px solid transparent";
-      $.append(craftSlot, this.craftableItems);
-    });
-      // Inventory Header
-    this.inventoryHeader = $.make("inventory-ui-header");
-    $.append(this.inventoryHeader, this.mainInventorySection);
-    const uiHeaderText = $.make("ui-header-text");
-    uiHeaderText.innerText = "INVENTORY: "
-    $.append(uiHeaderText, this.inventoryHeader);
-    //    Inventory Space
-    const extraInventorySpace = $.make("extra-inventory-space");
-    $.append(extraInventorySpace, this.inventoryHeader);
-    ["extra-inventory-slot-1", "extra-inventory-slot-2"].forEach(className => {
-      const inventorySlotElement = $.make([className, "hotbar-slot"]);
-      $.append(inventorySlotElement, extraInventorySpace);
-    });
-    //  Main Inventory Slots main-inventory-slots
-    const mainInventorySlots = $.make("main-inventory-slots");
-    $.append(mainInventorySlots, this.mainInventorySection);
-    [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].forEach(slotNumber => {
-      const hotbarSlot = $.make(["hotbar-slot", `hotbar-slot-${slotNumber}`]);
-      $.append(hotbarSlot, mainInventorySlots);
-    });
-
-    // Gear Container
-    const gearContainer = $.make("gear-container");
-    $.append(gearContainer, this.inventoryUIContainer);
-    $.append($.make("empty-gear-x"), gearContainer);
-      // Gear
-    const gearSets = $.make("gear-inventory-set");
-    $.append(gearSets, gearContainer);
-    [1,2,3,4].forEach((gearSet) => {
-      const gearSlot = $.make(["hotbar-slot", `gear-slot-${gearSet}`]);
-      $.append(gearSlot, gearSets);
-    });
+    const inventoryAndGearHeader = $.appendNew("inventory-and-gear-header", craftAndInventoryContainer);
+    inventoryAndGearHeader.innerText = "Inventory";
     
+    // Inventory and Gear Slots
+    const inventoryAndGear = $.appendNew("inventory-and-gear-slots", craftAndInventoryContainer);
+    const inventorySlots = $.appendNew("inventory-slots", inventoryAndGear);
+    [4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20].map((num) => {
+      const inventorySlot = $.appendNew(["hotbar-slot", `hotbar-slot-${num}`], inventorySlots);
+    });
+    const gearSlots = $.appendNew("gear-slots", inventoryAndGear);
+    [1,2,3,4].map((num) => {
+      const gearSlot = $.appendNew(["craft-slot", `gear-slot-${num}`], gearSlots);
+    });
+
+    // Category and Inventory Addon Slots
+    const categoryAndInventoryAddon = $.appendNew("category-and-inventory-addon", inventoryContainer);
+    const inventoryAddons = $.appendNew("inventory-addons", categoryAndInventoryAddon);
+    [1,2,3,4].map((num) => $.appendNew(["hotbar-slot", `craft-category-${num}`], inventoryAddons));
+    const craftCategory = $.appendNew("craft-categories", categoryAndInventoryAddon);
+    [1,2,3,4].map((num) => $.appendNew(["hotbar-slot", `craft-category-${num}`], craftCategory));
   }
 };
 
