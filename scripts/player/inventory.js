@@ -25,7 +25,7 @@ class Inventory {
     };
   }
 
-  toggleInventoryUI () {
+  toggleInventoryUI() {
     document.addEventListener("keydown", (e) => {
       if (e.key === 'Escape' && this.uiOpen) {
         this.closeUI();
@@ -40,7 +40,7 @@ class Inventory {
     });
   }
 
-  addToSlot(itemId, slotNumber, amt=1) {
+  addToSlot(itemId, slotNumber, amt = 1) {
     for (let i = 0; i < this.slots.length; i++) {
       const slot = this.slots[i];
 
@@ -73,7 +73,7 @@ class Inventory {
     this.renderHotbar();
   }
 
-  removeFromInventory(slotNumber, amt=1) {
+  removeFromInventory(slotNumber, amt = 1) {
     this.slots[slotNumber].amountOfItems -= amt;
     if (this.slots[slotNumber].amountOfItems === 0) {
       this.slots[slotNumber] = this.newSlot();
@@ -90,7 +90,7 @@ class Inventory {
         $.get(`hotbar-slot-item-${i + 1}`).style.background = itemMap[slot.id].background;
         $.get(`hotbar-slot-item-${i + 1}`).style.backgroundSize = "cover";
       } else $.get(`hotbar-slot-item-${i + 1}`).style.background = "transparent";
-      $.get(`hotbar-slot-number-${i + 1}`).innerText = slot.amountOfItems > 0? slot.amountOfItems : "";
+      $.get(`hotbar-slot-number-${i + 1}`).innerText = slot.amountOfItems > 0 ? slot.amountOfItems : "";
     }
   }
 
@@ -108,35 +108,36 @@ class Inventory {
     const craftAndInventoryContainer = $.appendNew("craft-and-inventory-container", inventoryContainer);
     const craftingSearch = $.appendNew("crafting-search", craftAndInventoryContainer, "input");
 
-      // Craftable Items Slots
+    // Craftable Items Slots
     const craftingContainer = $.appendNew("crafting-container", craftAndInventoryContainer);
-    [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18].map((num) => {
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map((num) => {
       const craftableSlot = $.appendNew(["craft-slot", `craft-slot-${num}`], craftingContainer);
       const craftSlotItem = $.appendNew(["hotbar-slot-item", `craft-slot-item-${num}`], craftableSlot);
+      const craftSlotNumber = $.appendNew(["hotbar-slot-number", `craft-slot-number-${num}`], craftableSlot);
     });
 
     const inventoryAndGearHeader = $.appendNew("inventory-and-gear-header", craftAndInventoryContainer);
     inventoryAndGearHeader.innerText = "Inventory";
-    
+
     // Inventory and Gear Slots
     const inventoryAndGear = $.appendNew("inventory-and-gear-slots", craftAndInventoryContainer);
     const inventorySlots = $.appendNew("inventory-slots", inventoryAndGear);
-    [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20].map((num) => {
+    [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((num) => {
       const inventorySlot = $.appendNew(["hotbar-slot", `inventory-slot-${num}`], inventorySlots);
       const hotbarSlotItem = $.appendNew(["hotbar-slot-item", `hotbar-slot-item-${num}`], inventorySlot);
       const hotbarSlotNumber = $.appendNew(["hotbar-slot-number", `hotbar-slot-number-${num}`], inventorySlot);
     });
     const gearSlots = $.appendNew("gear-slots", inventoryAndGear);
-    [1,2,3,4].map((num) => {
+    [1, 2, 3, 4].map((num) => {
       const gearSlot = $.appendNew(["craft-slot", `gear-slot-${num}`], gearSlots);
     });
 
     // Category and Inventory Addon Slots
     const categoryAndInventoryAddon = $.appendNew("category-and-inventory-addon", inventoryContainer);
     const inventoryAddons = $.appendNew("inventory-addons", categoryAndInventoryAddon);
-    [1,2,3,4].map((num) => $.appendNew(["hotbar-slot", `craft-category-${num}`], inventoryAddons));
+    [1, 2, 3, 4].map((num) => $.appendNew(["hotbar-slot", `craft-category-${num}`], inventoryAddons));
     const craftCategory = $.appendNew("craft-categories", categoryAndInventoryAddon);
-    [1,2,3,4].map((num) => $.appendNew(["hotbar-slot", `craft-category-${num}`], craftCategory));
+    [1, 2, 3, 4].map((num) => $.appendNew(["hotbar-slot", `craft-category-${num}`], craftCategory));
 
     // Render
     this.renderInventory();
@@ -144,25 +145,27 @@ class Inventory {
   }
 
   renderInventory() {
+    if (!this.uiOpen) return;
     const inventorySlots = this.slots.slice(4);
     for (let i = 0; i < inventorySlots.length; i++) {
       const slot = inventorySlots[i];
-      const inventoryNumber = (i+1) + 4;
+      const inventoryNumber = (i + 1) + 4;
       if (slot.id) {
         $.get(`hotbar-slot-item-${inventoryNumber}`).style.background = itemMap[slot.id].background;
         $.get(`hotbar-slot-item-${inventoryNumber}`).style.backgroundSize = "cover";
       } else $.get(`hotbar-slot-item-${inventoryNumber}`).style.background = "transparent";
-        $.get(`hotbar-slot-number-${inventoryNumber}`).innerText = slot.amountOfItems > 0? slot.amountOfItems : "";
-      }
+      $.get(`hotbar-slot-number-${inventoryNumber}`).innerText = slot.amountOfItems > 0 ? slot.amountOfItems : "";
+    }
   }
 
   renderCraftableItems() {
+    if (!this.uiOpen) return;
     const craftableItems = [];
 
     for (let itemId in itemMap) {
       const item = itemMap[itemId];
       if (!item.isCraftable) continue;
-      let hasAllIngredients = true;
+      // let hasAllIngredients = true;
 
       const ingredients = item.craftingRecipe;
       let ingredientsFound = {};
@@ -178,20 +181,25 @@ class Inventory {
       }
 
       // Match Quantites
+      let maximumItemcanMake = +Infinity;
       for (let ingredient in ingredients) {
         if (ingredients[ingredient] > ingredientsFound[ingredient]) {
           hasAllIngredients = false;
           break;
         }
+        const ratio = parseInt(ingredientsFound[ingredient] / ingredients[ingredient]);
+        if (ratio < maximumItemcanMake) maximumItemcanMake = ratio;
       }
 
-      if (hasAllIngredients) craftableItems.push(itemId);
+      if (maximumItemcanMake > 0) craftableItems.push([itemId, maximumItemcanMake]);
     }
 
-    craftableItems.map((itemId, index) => {
-      const item = itemMap[itemId];
+    craftableItems.map((itemArr, index) => {
+      const item = itemMap[itemArr[0]];
+      const amount = itemArr[1];
       $.get(`craft-slot-item-${index + 1}`).style.background = item.background;
       $.get(`craft-slot-item-${index + 1}`).style.backgroundSize = "cover";
+      $.get(`craft-slot-number-${index + 1}`).innerText = amount;
     });
   }
 };
