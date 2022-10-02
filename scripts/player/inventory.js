@@ -107,7 +107,6 @@ class Inventory {
     // Craft and Inventory Slots 
     const craftAndInventoryContainer = $.appendNew("craft-and-inventory-container", inventoryContainer);
     const craftingSearch = $.appendNew("crafting-search", craftAndInventoryContainer, "input");
-    setTimeout(() => craftingSearch.focus(), 50);
 
       // Craftable Items Slots
     const craftingContainer = $.appendNew("crafting-container", craftAndInventoryContainer);
@@ -121,8 +120,10 @@ class Inventory {
     // Inventory and Gear Slots
     const inventoryAndGear = $.appendNew("inventory-and-gear-slots", craftAndInventoryContainer);
     const inventorySlots = $.appendNew("inventory-slots", inventoryAndGear);
-    [4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20].map((num) => {
-      const inventorySlot = $.appendNew(["hotbar-slot", `hotbar-slot-${num}`], inventorySlots);
+    [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20].map((num) => {
+      const inventorySlot = $.appendNew(["hotbar-slot", `inventory-slot-${num}`], inventorySlots);
+      const hotbarSlotItem = $.appendNew(["hotbar-slot-item", `hotbar-slot-item-${num}`], inventorySlot);
+      const hotbarSlotNumber = $.appendNew(["hotbar-slot-number", `hotbar-slot-number-${num}`], inventorySlot);
     });
     const gearSlots = $.appendNew("gear-slots", inventoryAndGear);
     [1,2,3,4].map((num) => {
@@ -135,7 +136,23 @@ class Inventory {
     [1,2,3,4].map((num) => $.appendNew(["hotbar-slot", `craft-category-${num}`], inventoryAddons));
     const craftCategory = $.appendNew("craft-categories", categoryAndInventoryAddon);
     [1,2,3,4].map((num) => $.appendNew(["hotbar-slot", `craft-category-${num}`], craftCategory));
+
+    // Render
+    this.renderInventory();
   }
+
+  renderInventory() {
+    const inventorySlots = this.slots.slice(4);
+    for (let i = 0; i < inventorySlots.length; i++) {
+      const slot = inventorySlots[i];
+      const inventoryNumber = (i+1) + 4;
+      if (slot.id) {
+        $.get(`hotbar-slot-item-${inventoryNumber}`).style.background = itemMap[slot.id].background;
+        $.get(`hotbar-slot-item-${inventoryNumber}`).style.backgroundSize = "cover";
+      } else $.get(`hotbar-slot-item-${inventoryNumber}`).style.background = "transparent";
+        $.get(`hotbar-slot-number-${inventoryNumber}`).innerText = slot.amountOfItems > 0? slot.amountOfItems : "";
+      }
+    }
 };
 
 export default Inventory;
