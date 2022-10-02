@@ -8,6 +8,8 @@ class Stone extends Entity {
     this.gridIndexes = [this.spawn.addToGrid(x, y, 2)];
     
     // Meta
+    this.damageAnimationDuration = 150;
+    this.damageAnimation = "waddleBlock";
     this.interactRange = 48;
     this.dropPercentOnHit = 10;
   }
@@ -19,6 +21,7 @@ class Stone extends Entity {
   onClick(playerInRange, xDistance, yDistance) {
     if (this.isDead || !playerInRange || xDistance > this.interactRange || yDistance > this.interactRange) return;
 
+    this.animate(this.damageAnimation, this.damageAnimationDuration);
     this.health -= this.player.stoneDamage;
     if (this.health <= 0) {
       this.kill();

@@ -17,12 +17,8 @@ class Tree extends Entity {
     this.maxDrop = 5;
     this.minDrop = 2;
 
-    // Functions
-    // this.node.style.zIndex = `${parseInt(this.y + 128)}`;
     this.setGridIndexes();
     this.makeShadow();
-    // this.initEvents();
-    // this.addShadow();
   }
 
   setGridIndexes() {
@@ -71,7 +67,6 @@ class Tree extends Entity {
 
   dropLoot() {
     const dropAmount = parseInt(random.number(this.maxDrop, this.minDrop));
-    console.log(dropAmount);
     for (let i = 0; i <= dropAmount; i++) {
       new Item(this.x, this.y, this.spawn, 3);
     }
